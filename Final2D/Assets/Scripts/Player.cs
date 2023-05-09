@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
     
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private AudioSource audioThruster;
-/*    [SerializeField] private AudioClip soundThruster;*/
+/*  [SerializeField] private AudioClip soundThruster;*/
 
     private float rotSpeed;
     private float thrustAmount;
@@ -54,6 +54,7 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
+        
         if (Input.GetKey(KeyCode.W))
         {
             playAudio = true;

@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -13,6 +13,7 @@ public class Hud : MonoBehaviour
     [SerializeField] private TextMeshProUGUI verSpeedCurrent;
     [SerializeField] private TextMeshProUGUI horSpeedArrow;
     [SerializeField] private TextMeshProUGUI verSpeedArrow;
+    [SerializeField] private GameObject thePlayer;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +24,6 @@ public class Hud : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+  
     }
 }
