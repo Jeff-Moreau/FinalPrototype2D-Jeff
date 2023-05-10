@@ -926,7 +926,7 @@ GameObject:
   - component: {fileID: 915830177}
   - component: {fileID: 915830176}
   - component: {fileID: 915830178}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -947,6 +947,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 915830177}
   audioThruster: {fileID: 915830178}
+  altitude: 0
 --- !u!212 &915830174
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1007,7 +1008,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 915830172}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.06, y: -0.297, z: 0}
+  m_LocalPosition: {x: -6.23, y: 3.56, z: 0}
   m_LocalScale: {x: 0.20193824, y: 0.20193824, z: 0.20193824}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2082,6 +2083,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   thePlayer: {fileID: 915830172}
   fuelAmount: 0
+  mainCam: {fileID: 519420031}
 --- !u!1 &1584045567
 GameObject:
   m_ObjectHideFlags: 0

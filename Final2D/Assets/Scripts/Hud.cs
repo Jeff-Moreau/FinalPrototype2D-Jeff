@@ -5,14 +5,14 @@ using UnityEngine;
 
 public class Hud : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI scoreTotal;
-    [SerializeField] private TextMeshProUGUI timeTotal;
+    [SerializeField] public TextMeshProUGUI scoreTotal;
+    [SerializeField] public TextMeshProUGUI timeTotal;
     [SerializeField] public TextMeshProUGUI fuelTotal;
-    [SerializeField] private TextMeshProUGUI altitudeCurrent;
-    [SerializeField] private TextMeshProUGUI horSpeedCurrent;
-    [SerializeField] private TextMeshProUGUI verSpeedCurrent;
-    [SerializeField] private TextMeshProUGUI horSpeedArrow;
-    [SerializeField] private TextMeshProUGUI verSpeedArrow;
+    [SerializeField] public TextMeshProUGUI altitudeCurrent;
+    [SerializeField] public TextMeshProUGUI horSpeedCurrent;
+    [SerializeField] public TextMeshProUGUI verSpeedCurrent;
+    [SerializeField] public TextMeshProUGUI horSpeedArrow;
+    [SerializeField] public TextMeshProUGUI verSpeedArrow;
     [SerializeField] private TextMeshProUGUI insertCoins;
     [SerializeField] private GameObject thePlayer;
 
@@ -28,7 +28,7 @@ public class Hud : MonoBehaviour
     {
         timerBlink += Time.deltaTime;
 
-        Debug.Log(timerBlink);
+        //Debug.Log(timerBlink);
         if (timerBlink < 1.5f)
         {
             insertCoins.enabled = true;
