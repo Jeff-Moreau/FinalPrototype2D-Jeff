@@ -10,10 +10,13 @@ public class GameLoop : MonoBehaviour
 
     private float playerHorVelocity;
     private float playerVerVelocity;
-    private float gameTime;
+    private float gameTimeMinutes;
+    private float gameTimeSeconds;
     private float gameSeconds;
     private float gameMinutes;
     private float altitudeNow;
+    private string newSeconds;
+    private string newMinutes;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,7 +27,8 @@ public class GameLoop : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        gameTime += Time.deltaTime;
+        gameTimeMinutes += Time.deltaTime;
+        gameTimeSeconds += Time.deltaTime;
 
         altitudeNow = thePlayer.GetComponent<Player>().altitude;
         gameObject.GetComponent<Hud>().altitudeCurrent.text = "" + Mathf.Floor(altitudeNow * 420);
@@ -67,16 +71,29 @@ public class GameLoop : MonoBehaviour
             gameObject.GetComponent<Hud>().fuelTotal.text = fuelAmount.ToString();
         }
 
-        if (gameTime < 60)
+        if (gameTimeSeconds < 10)
         {
-            gameSeconds = Mathf.Floor(gameTime);
+            gameSeconds = Mathf.Floor(gameTimeSeconds);
+            newSeconds = "0" + gameSeconds;
+        }
+        else if (gameTimeSeconds >= 10 && gameTimeSeconds < 60)
+        {
+            gameSeconds = Mathf.Floor(gameTimeSeconds);
+            newSeconds = "" + gameSeconds;
+        }
+        else
+        {
+            gameTimeSeconds = 0;
         }
 
-        if (gameTime >= 59)
+        if (gameTimeMinutes >= 60)
         {
-            gameMinutes = 1;
-            gameSeconds = 0;
+            gameMinutes += 1;
+            gameTimeMinutes = 0;
         }
-        gameObject.GetComponent<Hud>().timeTotal.text = gameMinutes + ":" + gameSeconds;
+
+        gameObject.GetComponent<Hud>().timeTotal.text = "0" + gameMinutes + ":" + newSeconds;
+
+        
     }
 }
