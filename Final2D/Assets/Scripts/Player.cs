@@ -5,8 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField] private AudioSource playerSoundFXSource;
-    [SerializeField] private AudioClip soundFXThruster;
-    [SerializeField] private AudioClip soundFXShipExplode;
+    [SerializeField] private AudioClip[] soundFX;
     [SerializeField] private GameObject mainGame;
     [SerializeField] private GameObject theThruster;
     [SerializeField] private DebugLogger debugLogger;
@@ -18,10 +17,14 @@ public class Player : MonoBehaviour
     private bool playAudio;
     private Vector3 initialPosition;
     public float altitude;
+    public float locHit;
+    public float altitudeNow;
     private float playerVerVelocity;
+    private Vector3 initialCam;
 
     void Start()
     {
+        initialCam = mainGame.transform.position;
         userInput = mainGame.GetComponent<UserInput>();
         initialPosition = transform.position;
         playAudio = false;
@@ -62,6 +65,8 @@ public class Player : MonoBehaviour
 
         if (ground.collider != null)
         {
+            locHit = ground.point.y;
+            DebugToCon(locHit);
             altitude = Mathf.Abs(ground.point.y - transform.position.y);
             //DebugToCon(ground.collider.name + altitude);
         }
@@ -73,9 +78,20 @@ public class Player : MonoBehaviour
 
             if (!playerSoundFXSource.isPlaying)
             {
-                playerSoundFXSource.PlayOneShot(soundFXThruster);
+                playerSoundFXSource.PlayOneShot(soundFX[0]);
                 DebugToCon("Thruster Sound On");
             }
+        }
+        altitudeNow = Mathf.Floor(altitude * 420);
+        if (altitudeNow < 400)
+        {
+            mainGame.transform.position = new Vector3(transform.position.x, transform.position.y, -10);
+            mainGame.GetComponent<Camera>().orthographicSize = 2;
+        }
+        else
+        {
+            mainGame.transform.position = initialCam;
+           mainGame.GetComponent<Camera>().orthographicSize = 5;
         }
     }
 
@@ -86,7 +102,7 @@ public class Player : MonoBehaviour
             if (Mathf.Floor(playerVerVelocity * 100) < -15)
             {
                 DebugToCon("The Ship Has Crashed");
-                playerSoundFXSource.PlayOneShot(soundFXShipExplode);
+                playerSoundFXSource.PlayOneShot(soundFX[1]);
             }
             else
             {
@@ -95,7 +111,6 @@ public class Player : MonoBehaviour
                 GetComponent<Rigidbody2D>().freezeRotation = true;
                 GetComponent<Transform>().eulerAngles = new Vector3(0, 0, 0);
             }
-            
         }
     }
 
