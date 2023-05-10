@@ -13,6 +13,7 @@ public class UserInput : MonoBehaviour
     public bool LeftTurn {  get; private set; }
     public bool RightTurn { get; private set; }
     public bool Thruster { get; private set; }
+    public bool ThrusterOff { get; private set; }
 
     void Update()
     {
@@ -24,5 +25,6 @@ public class UserInput : MonoBehaviour
         LeftTurn = Input.GetKeyDown(rotateLeft);
         RightTurn = Input.GetKeyDown(rotateRight);
         Thruster = Input.GetKey(thrusterOn);
+        ThrusterOff = Input.GetKeyUp(thrusterOn);
     }
 }

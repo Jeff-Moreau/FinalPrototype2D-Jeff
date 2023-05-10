@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private AudioSource audioThruster;
+    [SerializeField] private AudioSource playerSoundFXSource;
+    [SerializeField] private AudioClip soundFXThruster;
+    [SerializeField] private AudioClip soundFXShipExplode;
     [SerializeField] private GameObject mainGame;
     [SerializeField] private GameObject theThruster;
     [SerializeField] private DebugLogger debugLogger;
 
+    private Rigidbody2D myRigidBody; 
     private UserInput userInput;
     private float rotSpeed;
     private float thrustAmount;
@@ -25,12 +27,13 @@ public class Player : MonoBehaviour
         playAudio = false;
         rotSpeed = 15;
         thrustAmount = 250;
+        myRigidBody = GetComponent<Rigidbody2D>();
     }
 
     void Update()
     {
-        playerVerVelocity = GetComponent<Rigidbody2D>().velocity.y;
-        GetComponent<Rigidbody2D>().freezeRotation = false;
+        playerVerVelocity = myRigidBody.velocity.y;
+        myRigidBody.freezeRotation = false;
         if (userInput.LeftTurn)
         {
             GetComponent<Transform>().eulerAngles += new Vector3(0, 0, rotSpeed);
@@ -40,24 +43,17 @@ public class Player : MonoBehaviour
             GetComponent<Transform>().eulerAngles += new Vector3(0, 0, -rotSpeed);
         }
 
-        if (!userInput.Thruster)
+        if (userInput.ThrusterOff)
         {
-            DebugToCon("Audio Off");
             theThruster.gameObject.SetActive(false);
-            if (audioThruster.isPlaying)
+
+            if (playerSoundFXSource.isPlaying)
             {
-                audioThruster.Stop();
-                playAudio = false;
+                playerSoundFXSource.Stop();
+                DebugToCon("Thruster Sound Off");
             }
         }
-        if (playAudio)
-        {
-            if (!audioThruster.isPlaying)
-            {
-                DebugToCon("Audio On");
-                audioThruster.Play();
-            }
-        }
+
     }
 
     private void FixedUpdate()
@@ -67,14 +63,19 @@ public class Player : MonoBehaviour
         if (ground.collider != null)
         {
             altitude = Mathf.Abs(ground.point.y - transform.position.y);
-            DebugToCon(ground.collider.name + altitude);
+            //DebugToCon(ground.collider.name + altitude);
         }
 
         if (userInput.Thruster)
         {
             theThruster.gameObject.SetActive(true);
-            playAudio = true;
-            rb.AddForce(transform.up * thrustAmount);
+            myRigidBody.AddForce(transform.up * thrustAmount);
+
+            if (!playerSoundFXSource.isPlaying)
+            {
+                playerSoundFXSource.PlayOneShot(soundFXThruster);
+                DebugToCon("Thruster Sound On");
+            }
         }
     }
 
@@ -84,10 +85,12 @@ public class Player : MonoBehaviour
         {
             if (Mathf.Floor(playerVerVelocity * 100) < -15)
             {
-                Destroy(gameObject);
+                DebugToCon("The Ship Has Crashed");
+                playerSoundFXSource.PlayOneShot(soundFXShipExplode);
             }
             else
             {
+                DebugToCon("Ship Has Successfuly Landed");
                 transform.position = initialPosition;
                 GetComponent<Rigidbody2D>().freezeRotation = true;
                 GetComponent<Transform>().eulerAngles = new Vector3(0, 0, 0);

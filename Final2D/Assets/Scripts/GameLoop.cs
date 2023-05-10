@@ -32,7 +32,7 @@ public class GameLoop : MonoBehaviour
         playerHorVelocity = thePlayer.GetComponent<Rigidbody2D>().velocity.x;
         gameObject.GetComponent<Hud>().horSpeedCurrent.text = "" + Mathf.Floor(playerHorVelocity*100);
 
-        if (playerHorVelocity > 0) 
+        if (playerHorVelocity > 0)
         {
             gameObject.GetComponent<Hud>().horSpeedArrow.text = "→";
         }
