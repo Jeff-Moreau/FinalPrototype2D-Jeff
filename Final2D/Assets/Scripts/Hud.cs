@@ -28,7 +28,6 @@ public class Hud : MonoBehaviour
     {
         timerBlink += Time.deltaTime;
 
-        //Debug.Log(timerBlink);
         if (timerBlink < 1.5f)
         {
             insertCoins.enabled = true;

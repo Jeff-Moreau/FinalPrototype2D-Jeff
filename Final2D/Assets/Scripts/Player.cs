@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     [SerializeField] private AudioSource audioThruster;
     [SerializeField] private GameObject mainGame;
     [SerializeField] private GameObject theThruster;
+    [SerializeField] private DebugLogger debugLogger;
 
     private UserInput userInput;
     private float rotSpeed;
@@ -15,6 +16,7 @@ public class Player : MonoBehaviour
     private bool playAudio;
     private Vector3 initialPosition;
     public float altitude;
+    private float playerVerVelocity;
 
     void Start()
     {
@@ -27,6 +29,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        playerVerVelocity = GetComponent<Rigidbody2D>().velocity.y;
         GetComponent<Rigidbody2D>().freezeRotation = false;
         if (userInput.LeftTurn)
         {
@@ -39,7 +42,7 @@ public class Player : MonoBehaviour
 
         if (!userInput.Thruster)
         {
-            Debug.Log("Audio Off");
+            DebugToCon("Audio Off");
             theThruster.gameObject.SetActive(false);
             if (audioThruster.isPlaying)
             {
@@ -51,7 +54,7 @@ public class Player : MonoBehaviour
         {
             if (!audioThruster.isPlaying)
             {
-                Debug.Log("Audio On");
+                DebugToCon("Audio On");
                 audioThruster.Play();
             }
         }
@@ -64,7 +67,7 @@ public class Player : MonoBehaviour
         if (ground.collider != null)
         {
             altitude = Mathf.Abs(ground.point.y - transform.position.y);
-            Debug.Log(ground.collider.name + altitude);
+            DebugToCon(ground.collider.name + altitude);
         }
 
         if (userInput.Thruster)
@@ -79,9 +82,25 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.name == "Mountain")
         {
-            transform.position = initialPosition;
-            GetComponent<Rigidbody2D>().freezeRotation = true;
-            GetComponent<Transform>().eulerAngles = new Vector3(0, 0, 0);
+            if (Mathf.Floor(playerVerVelocity * 100) < -15)
+            {
+                Destroy(gameObject);
+            }
+            else
+            {
+                transform.position = initialPosition;
+                GetComponent<Rigidbody2D>().freezeRotation = true;
+                GetComponent<Transform>().eulerAngles = new Vector3(0, 0, 0);
+            }
+            
+        }
+    }
+
+    private void DebugToCon(object message)
+    {
+        if (debugLogger)
+        {
+            debugLogger.DebugCon(message, this);
         }
     }
 }
