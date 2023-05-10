@@ -27,7 +27,7 @@ public class GameLoop : MonoBehaviour
         gameTime += Time.deltaTime;
 
         altitudeNow = thePlayer.GetComponent<Player>().altitude;
-        gameObject.GetComponent<Hud>().altitudeCurrent.text = "" + Mathf.Floor(altitudeNow * 100);
+        gameObject.GetComponent<Hud>().altitudeCurrent.text = "" + Mathf.Floor(altitudeNow * 420);
 
         playerHorVelocity = thePlayer.GetComponent<Rigidbody2D>().velocity.x;
         gameObject.GetComponent<Hud>().horSpeedCurrent.text = "" + Mathf.Floor(playerHorVelocity*100);
