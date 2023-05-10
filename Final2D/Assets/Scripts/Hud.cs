@@ -40,6 +40,8 @@ public class Hud : MonoBehaviour
         {
             timerBlink = 0;
         }
+
+        scoreTotal.text = "" + thePlayer.GetComponent<Player>().currentScore;
         
     }
 }

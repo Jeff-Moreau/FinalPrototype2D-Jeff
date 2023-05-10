@@ -21,9 +21,13 @@ public class Player : MonoBehaviour
     public float altitudeNow;
     private float playerVerVelocity;
     private Vector3 initialCam;
+    private int multiplyScore;
+    private int baseScore;
+    public int currentScore;
 
     void Start()
     {
+        baseScore = 50;
         initialCam = mainGame.transform.position;
         userInput = mainGame.GetComponent<UserInput>();
         initialPosition = transform.position;
@@ -66,7 +70,7 @@ public class Player : MonoBehaviour
         if (ground.collider != null)
         {
             locHit = ground.point.y;
-            DebugToCon(locHit);
+            //DebugToCon(locHit);
             altitude = Mathf.Abs(ground.point.y - transform.position.y);
             //DebugToCon(ground.collider.name + altitude);
         }
@@ -86,7 +90,7 @@ public class Player : MonoBehaviour
         if (altitudeNow < 400)
         {
             mainGame.transform.position = new Vector3(transform.position.x, transform.position.y, -10);
-            mainGame.GetComponent<Camera>().orthographicSize = 2;
+            mainGame.GetComponent<Camera>().orthographicSize = 1.5f;
         }
         else
         {
@@ -99,13 +103,15 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.name == "Mountain")
         {
-            if (Mathf.Floor(playerVerVelocity * 100) < -15)
+            if (Mathf.Floor(playerVerVelocity * 100) < -10)
             {
+                currentScore += (baseScore/2);
                 DebugToCon("The Ship Has Crashed");
                 playerSoundFXSource.PlayOneShot(soundFX[1]);
             }
             else
             {
+                currentScore += (baseScore * multiplyScore);
                 DebugToCon("Ship Has Successfuly Landed");
                 transform.position = initialPosition;
                 GetComponent<Rigidbody2D>().freezeRotation = true;
@@ -114,6 +120,14 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.tag == "Bonus")
+        {
+            DebugToCon("You touched a Bonus");
+            multiplyScore = collision.gameObject.GetComponent<RandomBonus>().bonusRandom;
+        }
+    }
     private void DebugToCon(object message)
     {
         if (debugLogger)
