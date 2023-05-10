@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     [SerializeField] private AudioClip[] soundFX;
     [SerializeField] private GameObject mainGame;
     [SerializeField] private GameObject theThruster;
+    [SerializeField] private GameObject theHUD;
 
     public int currentScore;
     public float altitude;
@@ -18,6 +19,8 @@ public class Player : MonoBehaviour
     private Rigidbody2D myRigidBody; 
     private UserInput userInput;
 
+    private int fuelUsage;
+    private int totalFuel;
     private int multiplyScore;
     private int baseScore;
     private float playerVerVelocity;
@@ -32,10 +35,11 @@ public class Player : MonoBehaviour
         userInput = mainGame.GetComponent<UserInput>();
         myRigidBody = GetComponent<Rigidbody2D>();
         myRigidBody.freezeRotation = false;
-
+        
         initialCam = mainGame.transform.position;
         initialPosition = transform.position;
 
+        fuelUsage = 1;
         baseScore = 50;
         rotSpeed = 15;
         thrustAmount = 250;
@@ -44,6 +48,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         playerVerVelocity = myRigidBody.velocity.y;
+
 
         if (userInput.LeftTurn)
         {
@@ -57,6 +62,8 @@ public class Player : MonoBehaviour
         if (userInput.ThrusterOff)
         {
             theThruster.gameObject.SetActive(false);
+
+
 
             if (playerSoundFXSource.isPlaying)
             {
@@ -83,6 +90,9 @@ public class Player : MonoBehaviour
         {
             theThruster.gameObject.SetActive(true);
             myRigidBody.AddForce(transform.up * thrustAmount);
+
+            theHUD.GetComponent<GameLoop>().fuelAmount -= fuelUsage;
+
 
             if (!playerSoundFXSource.isPlaying)
             {

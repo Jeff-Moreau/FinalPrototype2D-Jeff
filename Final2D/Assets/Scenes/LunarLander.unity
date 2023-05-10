@@ -2841,17 +2841,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 578a40df654f87b4483137ba8e1add5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debugLogger: {fileID: 147755013}
   playerSoundFXSource: {fileID: 58680735}
   soundFX:
   - {fileID: 8300000, guid: 64e5fcda0078a6047974d44d7add69c6, type: 3}
   - {fileID: 8300000, guid: 15bbe9d2c2eb358488f269af97f8eb6a, type: 3}
   mainGame: {fileID: 519420028}
   theThruster: {fileID: 1547802939}
-  debugLogger: {fileID: 147755013}
+  theHUD: {fileID: 1509010831}
+  currentScore: 0
   altitude: 0
   locHit: 0
   altitudeNow: 0
-  currentScore: 0
 --- !u!212 &915830174
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4201,7 +4202,7 @@ GameObject:
   - component: {fileID: 1509010836}
   - component: {fileID: 1509010837}
   m_Layer: 5
-  m_Name: HUD Canvas
+  m_Name: HUDCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4339,8 +4340,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thePlayer: {fileID: 915830172}
-  fuelAmount: 0
   mainCam: {fileID: 519420031}
+  fuelAmount: 0
 --- !u!1 &1512338312
 GameObject:
   m_ObjectHideFlags: 0

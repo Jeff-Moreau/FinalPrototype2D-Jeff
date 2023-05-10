@@ -5,9 +5,9 @@ using UnityEngine;
 public class GameLoop : MonoBehaviour
 {
     [SerializeField] private GameObject thePlayer;
-    [SerializeField] private int fuelAmount;
     [SerializeField] private Camera mainCam;
 
+    public int fuelAmount;
     private float playerHorVelocity;
     private float playerVerVelocity;
     private float gameTimeMinutes;
@@ -16,12 +16,12 @@ public class GameLoop : MonoBehaviour
     private float gameMinutes;
     private float altitudeNow;
     private string newSeconds;
-    private string newMinutes;
+
     // Start is called before the first frame update
     void Start()
     {
         gameMinutes = 0;
-        gameObject.GetComponent<Hud>().fuelTotal.text = "0000";
+        gameObject.GetComponent<Hud>().fuelTotal.text = "0000";  
     }
 
     // Update is called once per frame
@@ -30,6 +30,7 @@ public class GameLoop : MonoBehaviour
         gameTimeMinutes += Time.deltaTime;
         gameTimeSeconds += Time.deltaTime;
 
+        gameObject.GetComponent<Hud>().fuelTotal.text = fuelAmount.ToString();
         altitudeNow = thePlayer.GetComponent<Player>().altitude;
         gameObject.GetComponent<Hud>().altitudeCurrent.text = "" + Mathf.Floor(altitudeNow * 420);
 
@@ -68,7 +69,6 @@ public class GameLoop : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.C) && fuelAmount <6000)
         {
             fuelAmount += 750;
-            gameObject.GetComponent<Hud>().fuelTotal.text = fuelAmount.ToString();
         }
 
         if (gameTimeSeconds < 10)
