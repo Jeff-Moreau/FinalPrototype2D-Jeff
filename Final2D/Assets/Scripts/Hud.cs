@@ -17,6 +17,7 @@ public class Hud : MonoBehaviour
     [SerializeField] private GameObject thePlayer;
 
     private float timerBlink;
+    private float scoreNow;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +28,8 @@ public class Hud : MonoBehaviour
     void Update()
     {
         timerBlink += Time.deltaTime;
+
+        scoreNow = thePlayer.GetComponent<Player>().currentScore;
 
         if (timerBlink < 1.5f)
         {
@@ -40,8 +43,19 @@ public class Hud : MonoBehaviour
         {
             timerBlink = 0;
         }
+        if (scoreNow == 0)
+        {
+            scoreTotal.text = "0000";
+        }
+        else if (scoreNow>0&& scoreNow <100)
+        {
+            scoreTotal.text = "00" + scoreNow;
+        }
+        else if (scoreNow > 100 && scoreNow < 1000)
+        {
+            scoreTotal.text = "0" + scoreNow;
+        }
 
-        scoreTotal.text = "" + thePlayer.GetComponent<Player>().currentScore;
-        
+
     }
 }

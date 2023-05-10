@@ -4,43 +4,47 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField] private DebugLogger debugLogger;
     [SerializeField] private AudioSource playerSoundFXSource;
     [SerializeField] private AudioClip[] soundFX;
     [SerializeField] private GameObject mainGame;
     [SerializeField] private GameObject theThruster;
-    [SerializeField] private DebugLogger debugLogger;
 
-    private Rigidbody2D myRigidBody; 
-    private UserInput userInput;
-    private float rotSpeed;
-    private float thrustAmount;
-    private bool playAudio;
-    private Vector3 initialPosition;
+    public int currentScore;
     public float altitude;
     public float locHit;
     public float altitudeNow;
-    private float playerVerVelocity;
-    private Vector3 initialCam;
+
+    private Rigidbody2D myRigidBody; 
+    private UserInput userInput;
+
     private int multiplyScore;
     private int baseScore;
-    public int currentScore;
+    private float playerVerVelocity;
+    private float rotSpeed;
+    private float thrustAmount;
+    private Vector3 initialPosition;
+    private Vector3 initialCam;
+    private bool goodToLand = false;
 
     void Start()
     {
-        baseScore = 50;
-        initialCam = mainGame.transform.position;
         userInput = mainGame.GetComponent<UserInput>();
+        myRigidBody = GetComponent<Rigidbody2D>();
+        myRigidBody.freezeRotation = false;
+
+        initialCam = mainGame.transform.position;
         initialPosition = transform.position;
-        playAudio = false;
+
+        baseScore = 50;
         rotSpeed = 15;
         thrustAmount = 250;
-        myRigidBody = GetComponent<Rigidbody2D>();
     }
 
     void Update()
     {
         playerVerVelocity = myRigidBody.velocity.y;
-        myRigidBody.freezeRotation = false;
+
         if (userInput.LeftTurn)
         {
             GetComponent<Transform>().eulerAngles += new Vector3(0, 0, rotSpeed);
@@ -103,20 +107,31 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.name == "Mountain")
         {
-            if (Mathf.Floor(playerVerVelocity * 100) < -10)
+            if (!goodToLand)
             {
-                currentScore += (baseScore/2);
+                currentScore += (baseScore - 30);
                 DebugToCon("The Ship Has Crashed");
                 playerSoundFXSource.PlayOneShot(soundFX[1]);
             }
             else
             {
-                currentScore += (baseScore * multiplyScore);
-                DebugToCon("Ship Has Successfuly Landed");
-                transform.position = initialPosition;
-                GetComponent<Rigidbody2D>().freezeRotation = true;
-                GetComponent<Transform>().eulerAngles = new Vector3(0, 0, 0);
+                if (Mathf.Floor(playerVerVelocity * 100) < -10)
+                {
+                    currentScore += (baseScore / 2);
+                    DebugToCon("The Ship Has Crashed");
+                    playerSoundFXSource.PlayOneShot(soundFX[1]);
+                }
+                else
+                {
+                    
+                    currentScore += (baseScore * multiplyScore);
+                    DebugToCon("Ship Has Successfuly Landed");
+                    transform.position = initialPosition;
+                    GetComponent<Rigidbody2D>().freezeRotation = true;
+                    GetComponent<Transform>().eulerAngles = new Vector3(0, 0, 0);
+                }
             }
+            
         }
     }
 
@@ -126,6 +141,7 @@ public class Player : MonoBehaviour
         {
             DebugToCon("You touched a Bonus");
             multiplyScore = collision.gameObject.GetComponent<RandomBonus>().bonusRandom;
+            goodToLand = true;
         }
     }
     private void DebugToCon(object message)

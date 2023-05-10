@@ -11,7 +11,6 @@ public class RandomBonus : MonoBehaviour
     [SerializeField] private int minRandom;
     public int bonusRandom;
     private float myTime;
-    private bool turnOn;
 
     // Start is called before the first frame update
     void Start()
@@ -38,12 +37,18 @@ public class RandomBonus : MonoBehaviour
             {
                 myTime = 0;
             }
-    }
+        }
+
+        if (bonusRandom <= 1)
+        {
+            gameObject.SetActive(false);
+        }
 
     }
 
     private void MakeDecision()
     {
+
         if (bonusRandom <= 1) 
         {
             bonusText.text = "";

@@ -18,7 +18,7 @@ public class GameLoop : MonoBehaviour
     void Start()
     {
         gameMinutes = 0;
-        gameObject.GetComponent<Hud>().fuelTotal.text = "" + 0;
+        gameObject.GetComponent<Hud>().fuelTotal.text = "0000";
     }
 
     // Update is called once per frame
