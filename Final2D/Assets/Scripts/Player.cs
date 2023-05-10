@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private AudioSource audioThruster;
 /*  [SerializeField] private AudioClip soundThruster;*/
@@ -66,7 +65,6 @@ public class Player : MonoBehaviour
             altitude = Mathf.Abs(ground.point.y - transform.position.y);
             Debug.Log(ground.collider.name + altitude);
         }
-
 
         if (Input.GetKey(KeyCode.W))
         {
