@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private DebugLogger debugLogger;
     [SerializeField] private AudioSource playerSoundFXSource;
+    [SerializeField] private AudioSource shipWarningSoundFXSource;
     [SerializeField] private AudioClip[] soundFX;
     [SerializeField] private GameObject mainGame;
     [SerializeField] private GameObject theThruster;
@@ -63,8 +64,6 @@ public class Player : MonoBehaviour
         {
             theThruster.gameObject.SetActive(false);
 
-
-
             if (playerSoundFXSource.isPlaying)
             {
                 playerSoundFXSource.Stop();
@@ -72,11 +71,28 @@ public class Player : MonoBehaviour
             }
         }
 
+        if (theHUD.GetComponent<GameLoop>().fuelAmount >0 && theHUD.GetComponent<GameLoop>().fuelAmount <= 100)
+        {
+            if (!shipWarningSoundFXSource.isPlaying)
+            {
+                shipWarningSoundFXSource.PlayOneShot(soundFX[2]);
+                DebugToCon("Warning Beep");
+            }
+        }
+        else if (theHUD.GetComponent<GameLoop>().fuelAmount <= 0)
+        {
+            DebugToCon("The Ship Has Crashed");
+            playerSoundFXSource.PlayOneShot(soundFX[1]);
+            theHUD.GetComponent<GameLoop>().fuelAmount -= 100;
+            gameObject.SetActive(false);
+        }
+
     }
 
     private void FixedUpdate()
     {
         RaycastHit2D ground = Physics2D.Raycast(transform.position, Vector2.down, 500, 3);
+        altitudeNow = Mathf.Floor(altitude * 420);
 
         if (ground.collider != null)
         {
@@ -90,9 +106,7 @@ public class Player : MonoBehaviour
         {
             theThruster.gameObject.SetActive(true);
             myRigidBody.AddForce(transform.up * thrustAmount);
-
             theHUD.GetComponent<GameLoop>().fuelAmount -= fuelUsage;
-
 
             if (!playerSoundFXSource.isPlaying)
             {
@@ -100,7 +114,7 @@ public class Player : MonoBehaviour
                 DebugToCon("Thruster Sound On");
             }
         }
-        altitudeNow = Mathf.Floor(altitude * 420);
+
         if (altitudeNow < 400)
         {
             mainGame.transform.position = new Vector3(transform.position.x, transform.position.y, -10);
@@ -120,29 +134,40 @@ public class Player : MonoBehaviour
             if (!goodToLand)
             {
                 currentScore += (baseScore - 30);
-                DebugToCon("The Ship Has Crashed");
-                playerSoundFXSource.PlayOneShot(soundFX[1]);
+                ShipExplode();
             }
             else
             {
                 if (Mathf.Floor(playerVerVelocity * 100) < -10)
                 {
                     currentScore += (baseScore / 2);
-                    DebugToCon("The Ship Has Crashed");
-                    playerSoundFXSource.PlayOneShot(soundFX[1]);
+                    ShipExplode();
                 }
                 else
                 {
-                    
                     currentScore += (baseScore * multiplyScore);
-                    DebugToCon("Ship Has Successfuly Landed");
-                    transform.position = initialPosition;
-                    GetComponent<Rigidbody2D>().freezeRotation = true;
-                    GetComponent<Transform>().eulerAngles = new Vector3(0, 0, 0);
+                    ShipLanded();
                 }
             }
-            
         }
+    }
+
+    private void ShipLanded()
+    {
+        DebugToCon("Ship Has Successfuly Landed");
+        transform.position = initialPosition;
+        GetComponent<Rigidbody2D>().freezeRotation = true;
+        GetComponent<Transform>().eulerAngles = new Vector3(0, 0, 0);
+     }
+
+    private void ShipExplode()
+    {
+        DebugToCon("The Ship Has Crashed");
+        transform.position = initialPosition;
+        GetComponent<Rigidbody2D>().freezeRotation = true;
+        GetComponent<Transform>().eulerAngles = new Vector3(0, 0, 0);
+        theHUD.GetComponent<GameLoop>().fuelAmount -= 100;
+        playerSoundFXSource.PlayOneShot(soundFX[1]);
     }
 
     private void OnTriggerStay2D(Collider2D collision)

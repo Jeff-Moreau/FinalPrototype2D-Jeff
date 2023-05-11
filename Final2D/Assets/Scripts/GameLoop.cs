@@ -20,6 +20,7 @@ public class GameLoop : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        fuelAmount = 750;
         gameMinutes = 0;
         gameObject.GetComponent<Hud>().fuelTotal.text = "0000";  
     }
