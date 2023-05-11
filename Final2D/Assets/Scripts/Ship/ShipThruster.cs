@@ -10,6 +10,7 @@ public class ShipThruster : MonoBehaviour
 
     private void Start()
     {
+        debugLogger = GetComponent<DebugLogger>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         thrusterAudioSource = GetComponent<AudioSource>();
     }
