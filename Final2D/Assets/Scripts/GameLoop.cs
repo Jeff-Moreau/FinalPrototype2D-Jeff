@@ -8,6 +8,7 @@ public class GameLoop : MonoBehaviour
     [SerializeField] private Camera mainCam;
 
     public int fuelAmount;
+
     private float playerHorVelocity;
     private float playerVerVelocity;
     private float gameTimeMinutes;
@@ -17,15 +18,12 @@ public class GameLoop : MonoBehaviour
     private float altitudeNow;
     private string newSeconds;
 
-    // Start is called before the first frame update
     void Start()
     {
         fuelAmount = 750;
         gameMinutes = 0;
-        gameObject.GetComponent<Hud>().fuelTotal.text = "0000";  
     }
 
-    // Update is called once per frame
     void Update()
     {
         gameTimeMinutes += Time.deltaTime;
@@ -35,43 +33,23 @@ public class GameLoop : MonoBehaviour
         altitudeNow = thePlayer.GetComponent<Player>().altitude;
         gameObject.GetComponent<Hud>().altitudeCurrent.text = "" + Mathf.Floor(altitudeNow * 420);
 
-        playerHorVelocity = thePlayer.GetComponent<Rigidbody2D>().velocity.x;
-        gameObject.GetComponent<Hud>().horSpeedCurrent.text = "" + Mathf.Floor(playerHorVelocity*100);
+        HorArrows();
+        VerArrows();
+        SettingTime();
 
-        if (playerHorVelocity > 0)
-        {
-            gameObject.GetComponent<Hud>().horSpeedArrow.text = "→";
-        }
-        else if (playerHorVelocity < 0)
-        {
-            gameObject.GetComponent<Hud>().horSpeedArrow.text = "←";
-        }
-        else if (playerHorVelocity == 0 || playerHorVelocity == 1)
-        {
-            gameObject.GetComponent<Hud>().horSpeedArrow.text = "";
-        }
-
-        playerVerVelocity = thePlayer.GetComponent<Rigidbody2D>().velocity.y;
-        gameObject.GetComponent<Hud>().verSpeedCurrent.text = "" + Mathf.Floor(playerVerVelocity * 100);
-
-        if (playerVerVelocity > 0)
-        {
-            gameObject.GetComponent<Hud>().verSpeedArrow.text = "↑";
-        }
-        else if (playerVerVelocity < 0)
-        {
-            gameObject.GetComponent<Hud>().verSpeedArrow.text = "↓";
-        }
-        else if (playerVerVelocity == 0 || playerVerVelocity == 1)
-        {
-            gameObject.GetComponent<Hud>().verSpeedArrow.text = "";
-        }
-        
-        if (Input.GetKeyDown(KeyCode.C) && fuelAmount <6000)
+        if (Input.GetKeyDown(KeyCode.C) && fuelAmount < 6000)
         {
             fuelAmount += 750;
         }
 
+        if (fuelAmount <= 0)
+        {
+            fuelAmount = 0;
+        }
+    }
+
+    private void SettingTime()
+    {
         if (gameTimeSeconds < 10)
         {
             gameSeconds = Mathf.Floor(gameTimeSeconds);
@@ -94,7 +72,43 @@ public class GameLoop : MonoBehaviour
         }
 
         gameObject.GetComponent<Hud>().timeTotal.text = "0" + gameMinutes + ":" + newSeconds;
+    }
 
-        
+    private void VerArrows()
+    {
+        playerVerVelocity = thePlayer.GetComponent<Rigidbody2D>().velocity.y;
+        gameObject.GetComponent<Hud>().verSpeedCurrent.text = "" + Mathf.Floor(playerVerVelocity * 100);
+
+        if (playerVerVelocity > 0)
+        {
+            gameObject.GetComponent<Hud>().verSpeedArrow.text = "↑";
+        }
+        else if (playerVerVelocity < 0)
+        {
+            gameObject.GetComponent<Hud>().verSpeedArrow.text = "↓";
+        }
+        else if (playerVerVelocity == 0 || playerVerVelocity == 1)
+        {
+            gameObject.GetComponent<Hud>().verSpeedArrow.text = "";
+        }
+    }
+
+    private void HorArrows()
+    {
+        playerHorVelocity = thePlayer.GetComponent<Rigidbody2D>().velocity.x;
+        gameObject.GetComponent<Hud>().horSpeedCurrent.text = "" + Mathf.Floor(playerHorVelocity * 100);
+
+        if (playerHorVelocity > 0)
+        {
+            gameObject.GetComponent<Hud>().horSpeedArrow.text = "→";
+        }
+        else if (playerHorVelocity < 0)
+        {
+            gameObject.GetComponent<Hud>().horSpeedArrow.text = "←";
+        }
+        else if (playerHorVelocity == 0 || playerHorVelocity == 1)
+        {
+            gameObject.GetComponent<Hud>().horSpeedArrow.text = "";
+        }
     }
 }

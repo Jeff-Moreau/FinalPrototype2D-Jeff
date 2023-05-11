@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
     [SerializeField] private DebugLogger debugLogger;
     [SerializeField] private AudioSource playerSoundFXSource;
     [SerializeField] private AudioSource shipWarningSoundFXSource;
+    [SerializeField] private AudioSource gameBackgroundSound;
     [SerializeField] private AudioClip[] soundFX;
     [SerializeField] private GameObject mainGame;
     [SerializeField] private GameObject theThruster;
@@ -83,7 +84,7 @@ public class Player : MonoBehaviour
         {
             DebugToCon("The Ship Has Crashed");
             playerSoundFXSource.PlayOneShot(soundFX[1]);
-            theHUD.GetComponent<GameLoop>().fuelAmount -= 100;
+            gameBackgroundSound.Stop();
             gameObject.SetActive(false);
         }
 
@@ -146,6 +147,7 @@ public class Player : MonoBehaviour
                 else
                 {
                     currentScore += (baseScore * multiplyScore);
+
                     ShipLanded();
                 }
             }

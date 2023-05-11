@@ -21,6 +21,7 @@ public class Hud : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        fuelTotal.text = "0000";
         timerBlink = 0;
     }
 
