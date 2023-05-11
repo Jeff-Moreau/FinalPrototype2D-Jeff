@@ -6,6 +6,7 @@ public class GameLoop : MonoBehaviour
 {
     [SerializeField] private GameObject thePlayer;
     [SerializeField] private Camera mainCam;
+    [SerializeField] private GameObject theHUD;
 
     public int fuelAmount;
 
@@ -29,9 +30,9 @@ public class GameLoop : MonoBehaviour
         gameTimeMinutes += Time.deltaTime;
         gameTimeSeconds += Time.deltaTime;
 
-        gameObject.GetComponent<Hud>().fuelTotal.text = fuelAmount.ToString();
+        theHUD.GetComponent<Hud>().fuelTotal.text = fuelAmount.ToString();
         altitudeNow = thePlayer.GetComponent<Player>().altitude;
-        gameObject.GetComponent<Hud>().altitudeCurrent.text = "" + Mathf.Floor(altitudeNow * 420);
+        theHUD.GetComponent<Hud>().altitudeCurrent.text = "" + Mathf.Floor(altitudeNow * 420);
 
         HorArrows();
         VerArrows();
@@ -71,44 +72,44 @@ public class GameLoop : MonoBehaviour
             gameTimeMinutes = 0;
         }
 
-        gameObject.GetComponent<Hud>().timeTotal.text = "0" + gameMinutes + ":" + newSeconds;
+        theHUD.GetComponent<Hud>().timeTotal.text = "0" + gameMinutes + ":" + newSeconds;
     }
 
     private void VerArrows()
     {
         playerVerVelocity = thePlayer.GetComponent<Rigidbody2D>().velocity.y;
-        gameObject.GetComponent<Hud>().verSpeedCurrent.text = "" + Mathf.Floor(playerVerVelocity * 100);
+        theHUD.GetComponent<Hud>().verSpeedCurrent.text = "" + Mathf.Floor(playerVerVelocity * 100);
 
         if (playerVerVelocity > 0)
         {
-            gameObject.GetComponent<Hud>().verSpeedArrow.text = "↑";
+            theHUD.GetComponent<Hud>().verSpeedArrow.text = "↑";
         }
         else if (playerVerVelocity < 0)
         {
-            gameObject.GetComponent<Hud>().verSpeedArrow.text = "↓";
+            theHUD.GetComponent<Hud>().verSpeedArrow.text = "↓";
         }
         else if (playerVerVelocity == 0 || playerVerVelocity == 1)
         {
-            gameObject.GetComponent<Hud>().verSpeedArrow.text = "";
+            theHUD.GetComponent<Hud>().verSpeedArrow.text = "";
         }
     }
 
     private void HorArrows()
     {
         playerHorVelocity = thePlayer.GetComponent<Rigidbody2D>().velocity.x;
-        gameObject.GetComponent<Hud>().horSpeedCurrent.text = "" + Mathf.Floor(playerHorVelocity * 100);
+        theHUD.GetComponent<Hud>().horSpeedCurrent.text = "" + Mathf.Floor(playerHorVelocity * 100);
 
         if (playerHorVelocity > 0)
         {
-            gameObject.GetComponent<Hud>().horSpeedArrow.text = "→";
+            theHUD.GetComponent<Hud>().horSpeedArrow.text = "→";
         }
         else if (playerHorVelocity < 0)
         {
-            gameObject.GetComponent<Hud>().horSpeedArrow.text = "←";
+            theHUD.GetComponent<Hud>().horSpeedArrow.text = "←";
         }
         else if (playerHorVelocity == 0 || playerHorVelocity == 1)
         {
-            gameObject.GetComponent<Hud>().horSpeedArrow.text = "";
+            theHUD.GetComponent<Hud>().horSpeedArrow.text = "";
         }
     }
 }

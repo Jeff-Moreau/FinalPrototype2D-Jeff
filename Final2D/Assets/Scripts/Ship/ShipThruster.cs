@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ShipThruster : MonoBehaviour
 {
+
     private DebugLogger debugLogger;
     private SpriteRenderer spriteRenderer;
     private AudioSource thrusterAudioSource;

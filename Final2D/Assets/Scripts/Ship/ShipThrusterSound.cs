@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ShipThrusterSound : MonoBehaviour
 {
+
     [SerializeField] private AudioClip thrusterSound;
 
     private DebugLogger debugLogger;

@@ -4,75 +4,49 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private DebugLogger debugLogger;
+
     [SerializeField] private AudioSource playerSoundFXSource;
     [SerializeField] private AudioSource shipWarningSoundFXSource;
     [SerializeField] private AudioSource gameBackgroundSound;
     [SerializeField] private AudioClip[] soundFX;
-    [SerializeField] private GameObject mainGame;
+    [SerializeField] private GameObject coreGame;
     [SerializeField] private GameObject theThruster;
-    [SerializeField] private GameObject theHUD;
+    //[SerializeField] private GameObject theHUD;
 
     public int currentScore;
     public float altitude;
     public float locHit;
     public float altitudeNow;
 
+    private DebugLogger debugLogger;
     private Rigidbody2D myRigidBody; 
-    private UserInput userInput;
+    private Camera gameCamera;
 
-    private int fuelUsage;
-    private int totalFuel;
     private int multiplyScore;
     private int baseScore;
     private float playerVerVelocity;
-    private float rotSpeed;
-    private float thrustAmount;
     private Vector3 initialPosition;
-    private Vector3 initialCam;
+    private Vector3 initialCamPosition;
     private bool goodToLand = false;
 
     void Start()
     {
-        userInput = mainGame.GetComponent<UserInput>();
+        debugLogger = GetComponent<DebugLogger>();
         myRigidBody = GetComponent<Rigidbody2D>();
-        myRigidBody.freezeRotation = false;
-        
-        initialCam = mainGame.transform.position;
+        gameCamera = Camera.main;
+
+        initialCamPosition = gameCamera.transform.position;
         initialPosition = transform.position;
 
-        fuelUsage = 1;
+        myRigidBody.freezeRotation = false;
         baseScore = 50;
-        rotSpeed = 15;
-        thrustAmount = 250;
     }
 
     void Update()
     {
         playerVerVelocity = myRigidBody.velocity.y;
 
-
-        if (userInput.LeftTurn)
-        {
-            GetComponent<Transform>().eulerAngles += new Vector3(0, 0, rotSpeed);
-        }
-        if (userInput.RightTurn)
-        {
-            GetComponent<Transform>().eulerAngles += new Vector3(0, 0, -rotSpeed);
-        }
-
-        if (userInput.ThrusterOff)
-        {
-            theThruster.gameObject.GetComponent<SpriteRenderer>().enabled = false;
-
-/*            if (playerSoundFXSource.isPlaying)
-            {
-                playerSoundFXSource.Stop();
-                DebugToCon("Thruster Sound Off");
-            }*/
-        }
-
-        if (theHUD.GetComponent<GameLoop>().fuelAmount >0 && theHUD.GetComponent<GameLoop>().fuelAmount <= 100)
+        if (coreGame.GetComponent<GameLoop>().fuelAmount >0 && coreGame.GetComponent<GameLoop>().fuelAmount <= 100)
         {
             if (!shipWarningSoundFXSource.isPlaying)
             {
@@ -80,14 +54,14 @@ public class Player : MonoBehaviour
                 DebugToCon("Warning Beep");
             }
         }
-        else if (theHUD.GetComponent<GameLoop>().fuelAmount <= 0)
+        else if (coreGame.GetComponent<GameLoop>().fuelAmount <= 0)
         {
             DebugToCon("The Ship Has Crashed");
             playerSoundFXSource.PlayOneShot(soundFX[1]);
             gameBackgroundSound.Stop();
             gameObject.SetActive(false);
         }
-
+        DebugToCon("Good To Land: " + goodToLand);
     }
 
     private void FixedUpdate()
@@ -98,33 +72,18 @@ public class Player : MonoBehaviour
         if (ground.collider != null)
         {
             locHit = ground.point.y;
-            //DebugToCon(locHit);
             altitude = Mathf.Abs(ground.point.y - transform.position.y);
-            //DebugToCon(ground.collider.name + altitude);
-        }
-
-        if (userInput.Thruster)
-        {
-            theThruster.gameObject.GetComponent<SpriteRenderer>().enabled = true;
-            myRigidBody.AddForce(transform.up * thrustAmount);
-            theHUD.GetComponent<GameLoop>().fuelAmount -= fuelUsage;
-
-/*            if (!playerSoundFXSource.isPlaying)
-            {
-                playerSoundFXSource.PlayOneShot(soundFX[0]);
-                DebugToCon("Thruster Sound On");
-            }*/
         }
 
         if (altitudeNow < 400)
         {
-            mainGame.transform.position = new Vector3(transform.position.x, transform.position.y, -10);
-            mainGame.GetComponent<Camera>().orthographicSize = 1.5f;
+            gameCamera.transform.position = new Vector3(transform.position.x, transform.position.y, -10);
+            gameCamera.GetComponent<Camera>().orthographicSize = 1.5f;
         }
         else
         {
-            mainGame.transform.position = initialCam;
-           mainGame.GetComponent<Camera>().orthographicSize = 5;
+            gameCamera.transform.position = initialCamPosition;
+            gameCamera.GetComponent<Camera>().orthographicSize = 5;
         }
     }
 
@@ -168,7 +127,7 @@ public class Player : MonoBehaviour
         transform.position = initialPosition;
         GetComponent<Rigidbody2D>().freezeRotation = true;
         GetComponent<Transform>().eulerAngles = new Vector3(0, 0, 0);
-        theHUD.GetComponent<GameLoop>().fuelAmount -= 100;
+        coreGame.GetComponent<GameLoop>().fuelAmount -= 100;
         playerSoundFXSource.PlayOneShot(soundFX[1]);
     }
 
@@ -176,9 +135,17 @@ public class Player : MonoBehaviour
     {
         if (collision.tag == "Bonus")
         {
-            DebugToCon("You touched a Bonus");
+            DebugToCon("You are touching a Bonus");
             multiplyScore = collision.gameObject.GetComponent<RandomBonus>().bonusRandom;
             goodToLand = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.tag == "Bonus")
+        {
+            goodToLand = false;
         }
     }
     private void DebugToCon(object message)

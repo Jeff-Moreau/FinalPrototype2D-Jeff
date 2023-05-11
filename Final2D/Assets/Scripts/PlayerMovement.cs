@@ -4,15 +4,68 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+
+    [SerializeField] private GameObject coreGame;
+    [SerializeField] private GameObject theThruster;
+
+    private DebugLogger debugLogger;
+    private UserInput userInput;
+    private Transform shipRotation;
+    private Rigidbody2D shipRigidBody;
+    private SpriteRenderer thrusterToggle;
+    private GameLoop gameLoop;
+
+    private int fuelUsage;
+    private float shipRotationSpeed;
+    private float thrusterForce;
+
+    private void Start()
     {
-        
+        debugLogger = GetComponent<DebugLogger>();
+        userInput = coreGame.GetComponent<UserInput>();
+        shipRotation = GetComponent<Transform>();
+        shipRigidBody = GetComponent<Rigidbody2D>();
+        thrusterToggle = theThruster.gameObject.GetComponent<SpriteRenderer>();
+        gameLoop = coreGame.GetComponent<GameLoop>();
+
+        fuelUsage = 1;
+        shipRotationSpeed = 15;
+        thrusterForce = 250;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        if (userInput.LeftTurn)
+        {
+            shipRotation.eulerAngles += new Vector3(0, 0, shipRotationSpeed);
+        }
+
+        if (userInput.RightTurn)
+        {
+            shipRotation.eulerAngles += new Vector3(0, 0, -shipRotationSpeed);
+        }
+
+        if (userInput.ThrusterOff)
+        {
+            thrusterToggle.enabled = false;
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (userInput.Thruster)
+        {
+            thrusterToggle.enabled = true;
+            shipRigidBody.AddForce(transform.up * thrusterForce);
+            gameLoop.fuelAmount -= fuelUsage;
+        }
+    }
+
+    private void DebugToCon(object message)
+    {
+        if (debugLogger)
+        {
+            debugLogger.DebugCon(message, this);
+        }
     }
 }
