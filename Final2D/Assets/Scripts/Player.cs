@@ -63,13 +63,13 @@ public class Player : MonoBehaviour
 
         if (userInput.ThrusterOff)
         {
-            theThruster.gameObject.SetActive(false);
+            theThruster.gameObject.GetComponent<SpriteRenderer>().enabled = false;
 
-            if (playerSoundFXSource.isPlaying)
+/*            if (playerSoundFXSource.isPlaying)
             {
                 playerSoundFXSource.Stop();
                 DebugToCon("Thruster Sound Off");
-            }
+            }*/
         }
 
         if (theHUD.GetComponent<GameLoop>().fuelAmount >0 && theHUD.GetComponent<GameLoop>().fuelAmount <= 100)
@@ -105,15 +105,15 @@ public class Player : MonoBehaviour
 
         if (userInput.Thruster)
         {
-            theThruster.gameObject.SetActive(true);
+            theThruster.gameObject.GetComponent<SpriteRenderer>().enabled = true;
             myRigidBody.AddForce(transform.up * thrustAmount);
             theHUD.GetComponent<GameLoop>().fuelAmount -= fuelUsage;
 
-            if (!playerSoundFXSource.isPlaying)
+/*            if (!playerSoundFXSource.isPlaying)
             {
                 playerSoundFXSource.PlayOneShot(soundFX[0]);
                 DebugToCon("Thruster Sound On");
-            }
+            }*/
         }
 
         if (altitudeNow < 400)
