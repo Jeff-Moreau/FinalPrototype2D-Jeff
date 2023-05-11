@@ -9,13 +9,12 @@ public class ShipThrusterSound : MonoBehaviour
     private DebugLogger debugLogger;
     private AudioSource thrusterAudioSource;
 
-    private bool thrusterAudioSourceIsActive;
+    private bool thrusterAudioSourceIsActive = false;
 
     private void Start()
     {
         debugLogger = GetComponent<DebugLogger>();
         thrusterAudioSource = GetComponent<AudioSource>();
-        thrusterAudioSourceIsActive = false;
 
         ThrusterAudioSourceCheck();
     }
@@ -35,7 +34,7 @@ public class ShipThrusterSound : MonoBehaviour
         else
         {
             thrusterAudioSourceIsActive = false;
-            DebugToCon("<color=red>No AudioSource is available for the Thruster.</color>");
+            DebugToCon("<color=red>No AudioSource available to play Thruster Sound.</color>");
         }
     }
 
@@ -46,7 +45,7 @@ public class ShipThrusterSound : MonoBehaviour
                 if (!thrusterAudioSource.isPlaying)
                 {
                     thrusterAudioSource.PlayOneShot(thrusterSound);
-                    DebugToCon("Thruster Sound On");
+                    DebugToCon("<color=orange>Thruster Sound is Playing</color>");
                 }
             }
     }

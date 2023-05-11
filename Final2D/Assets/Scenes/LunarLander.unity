@@ -4629,8 +4629,8 @@ GameObject:
   - component: {fileID: 1547802944}
   - component: {fileID: 1547802943}
   - component: {fileID: 1547802940}
-  - component: {fileID: 1547802945}
   - component: {fileID: 1547802946}
+  - component: {fileID: 1547802947}
   m_Layer: 3
   m_Name: Thruster
   m_TagString: Untagged
@@ -4751,7 +4751,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd23197c90793994999e9500d9fd2072, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!82 &1547802945
+--- !u!114 &1547802946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1547802939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fafb308ff47a6d49830ca8cfdd118ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  debugOn: 1
+--- !u!82 &1547802947
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4762,7 +4775,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 0
+  m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -4847,19 +4860,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1547802946
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1547802939}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fafb308ff47a6d49830ca8cfdd118ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  debugOn: 1
 --- !u!1 &1568253729
 GameObject:
   m_ObjectHideFlags: 0

@@ -17,18 +17,44 @@ public class ShipThruster : MonoBehaviour
 
     private void Update()
     {
-        TurnAudioOn();
+        TurnThrusterSoundOn();
     }
 
-    private void TurnAudioOn()
+    private void TurnThrusterSoundOn()
     {
         if (spriteRenderer.enabled)
         {
-            thrusterAudioSource.enabled = true;
+            ThrusterSoundOn();
         }
         else
         {
+            ThrusterSoundOff();
+        }
+    }
+
+    private void ThrusterSoundOff()
+    {
+        if (thrusterAudioSource != null)
+        {
             thrusterAudioSource.enabled = false;
+            DebugToCon("<color=yellow>Turned Thruster AudioSource Off</color>");
+        }
+        else
+        {
+            DebugToCon("<color=red>There is No Thruster AudioSource to turn On.</color>");
+        }
+    }
+
+    private void ThrusterSoundOn()
+    {
+        if (thrusterAudioSource != null)
+        {
+            thrusterAudioSource.enabled = true;
+            DebugToCon("<color=green>Turned Thruster AudioSource On</color>");
+        }
+        else
+        {
+            DebugToCon("<color=red>There is No Thruster AudioSource to turn On.</color>");
         }
     }
 
