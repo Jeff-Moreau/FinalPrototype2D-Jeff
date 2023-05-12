@@ -783,51 +783,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 143339833}
   m_CullTransparentMesh: 1
---- !u!1 &147755011
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 147755012}
-  - component: {fileID: 147755013}
-  m_Layer: 0
-  m_Name: LogPlayer
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &147755012
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 147755011}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 321445432}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &147755013
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 147755011}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fafb308ff47a6d49830ca8cfdd118ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  debugOn: 1
 --- !u!1 &161820931
 GameObject:
   m_ObjectHideFlags: 0
@@ -1630,40 +1585,6 @@ MonoBehaviour:
   bonusText: {fileID: 109837516}
   maxRandom: 5
   minRandom: 0
---- !u!1 &321445431
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 321445432}
-  m_Layer: 0
-  m_Name: Loggers
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &321445432
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 321445431}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.026828, y: 2.6875951, z: 22.27355}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 147755012}
-  - {fileID: 1885683744}
-  - {fileID: 508320833}
-  m_Father: {fileID: 0}
-  m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &350554120
 GameObject:
   m_ObjectHideFlags: 0
@@ -1823,7 +1744,7 @@ Transform:
   - {fileID: 1191524447}
   - {fileID: 1975517773}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &505615395
 GameObject:
@@ -1952,51 +1873,6 @@ MonoBehaviour:
   bonusText: {fileID: 262722464}
   maxRandom: 3
   minRandom: 0
---- !u!1 &508320832
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 508320833}
-  - component: {fileID: 508320834}
-  m_Layer: 0
-  m_Name: LogCollisions
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &508320833
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 508320832}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 321445432}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &508320834
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 508320832}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fafb308ff47a6d49830ca8cfdd118ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  debugOn: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -2408,8 +2284,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bf365b8c5912d049a10720a16bcfc29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  theShip: {fileID: 915830172}
-  theHUD: {fileID: 1509010831}
+  _theShip: {fileID: 915830172}
+  _theHUD: {fileID: 1509010831}
 --- !u!1 &765446617
 GameObject:
   m_ObjectHideFlags: 0
@@ -2859,10 +2735,11 @@ GameObject:
   - component: {fileID: 915830181}
   - component: {fileID: 915830173}
   - component: {fileID: 915830180}
+  - component: {fileID: 915830182}
   - component: {fileID: 915830177}
   - component: {fileID: 915830176}
   m_Layer: 3
-  m_Name: Player
+  m_Name: Ship
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2880,15 +2757,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 578a40df654f87b4483137ba8e1add5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSoundFXSource: {fileID: 58680735}
-  shipWarningSoundFXSource: {fileID: 1975517774}
-  gameBackgroundSound: {fileID: 1191524448}
-  soundFX:
-  - {fileID: 8300000, guid: 64e5fcda0078a6047974d44d7add69c6, type: 3}
-  - {fileID: 8300000, guid: 15bbe9d2c2eb358488f269af97f8eb6a, type: 3}
-  - {fileID: 8300000, guid: c7432109a42fe904b82de0404d8766f2, type: 3}
-  coreGame: {fileID: 748299852}
-  theThruster: {fileID: 1547802939}
+  _playerSoundFXSource: {fileID: 58680735}
+  _shipWarningSoundFXSource: {fileID: 1975517774}
+  _gameBackgroundSound: {fileID: 1191524448}
+  _soundFX: []
+  _coreGame: {fileID: 748299852}
+  _theThruster: {fileID: 1547802939}
 --- !u!212 &915830174
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3006,8 +2880,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1af0c8c78b330646b320c2dce5bc942, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coreGame: {fileID: 748299852}
-  theThruster: {fileID: 1547802939}
+  _coreGame: {fileID: 748299852}
+  _theThruster: {fileID: 1547802939}
 --- !u!114 &915830181
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3021,6 +2895,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debugOn: 0
+--- !u!114 &915830182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 915830172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 112fc0f409fa84a4090689fb204f7bce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &992608035
 GameObject:
   m_ObjectHideFlags: 0
@@ -3565,7 +3451,7 @@ GameObject:
   - component: {fileID: 1112429596}
   - component: {fileID: 1112429598}
   m_Layer: 0
-  m_Name: Background
+  m_Name: StarFieldSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3702,7 +3588,7 @@ Transform:
   - {fileID: 505615396}
   - {fileID: 1624247107}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1191524446
 GameObject:
@@ -4656,10 +4542,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1547802942}
   - component: {fileID: 1547802941}
+  - component: {fileID: 1547802946}
   - component: {fileID: 1547802944}
   - component: {fileID: 1547802943}
   - component: {fileID: 1547802940}
-  - component: {fileID: 1547802946}
   - component: {fileID: 1547802947}
   m_Layer: 3
   m_Name: Thruster
@@ -4768,7 +4654,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9436708b854ed549888c125d4a616db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thrusterSound: {fileID: 8300000, guid: 64e5fcda0078a6047974d44d7add69c6, type: 3}
+  _thrusterSound: {fileID: 8300000, guid: 64e5fcda0078a6047974d44d7add69c6, type: 3}
 --- !u!114 &1547802944
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6309,51 +6195,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1879882691}
   m_CullTransparentMesh: 1
---- !u!1 &1885683743
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1885683744}
-  - component: {fileID: 1885683745}
-  m_Layer: 0
-  m_Name: LogHud
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1885683744
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1885683743}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 321445432}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1885683745
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1885683743}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fafb308ff47a6d49830ca8cfdd118ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  debugOn: 0
 --- !u!1 &1901527133
 GameObject:
   m_ObjectHideFlags: 0

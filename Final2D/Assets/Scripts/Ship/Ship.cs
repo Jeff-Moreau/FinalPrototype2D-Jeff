@@ -5,88 +5,88 @@ using UnityEngine;
 public class Ship : MonoBehaviour
 {
 
-    [SerializeField] private AudioSource playerSoundFXSource;
-    [SerializeField] private AudioSource shipWarningSoundFXSource;
-    [SerializeField] private AudioSource gameBackgroundSound;
-    [SerializeField] private AudioClip[] soundFX;
-    [SerializeField] private GameObject coreGame;
-    [SerializeField] private GameObject theThruster;
+    [SerializeField] private AudioSource _playerSoundFXSource;
+    [SerializeField] private AudioSource _shipWarningSoundFXSource;
+    [SerializeField] private AudioSource _gameBackgroundSound;
+    [SerializeField] private AudioClip[] _soundFX;
+    [SerializeField] private GameObject _coreGame;
+    [SerializeField] private GameObject _theThruster;
 
-    private GameLoop shipFuelTank;
-    private DebugLogger debugLogger;
-    private Rigidbody2D shipRigidBody;
-    private Camera gameCamera;
-    private Transform shipRotation;
+    private CoreGame _shipFuelTank;
+    private DebugLogger _debugLogger;
+    private Rigidbody2D _shipRigidBody;
+    private Camera _gameCamera;
+    private Transform _shipRotation;
 
-    private int currentScore;
-    private int scoreMultiplier;
-    private int baseScore;
-    private float shipCurrentAltitude;
-    private float shipAltitude;
-    private float shipVerVelocity;
-    private Vector3 initialShipPosition;
-    private Vector3 initialCameraPosition;
-    private bool goodToLand = false;
+    private int _currentScore;
+    private int _scoreMultiplier;
+    private int _baseScore;
+    private float _shipCurrentAltitude;
+    private float _shipAltitude;
+    private float _shipVerVelocity;
+    private Vector3 _initialShipPosition;
+    private Vector3 _initialCameraPosition;
+    private bool _goodToLand = false;
 
-    public int GetCurrentScore() => currentScore;
-    public float GetShipAltitude() => shipAltitude;
+    public int GetCurrentScore => _currentScore;
+    public float GetShipAltitude => _shipAltitude;
 
     void Start()
     {
-        shipFuelTank = coreGame.GetComponent<GameLoop>();
-        debugLogger = GetComponent<DebugLogger>();
-        shipRigidBody = GetComponent<Rigidbody2D>();
-        shipRotation = GetComponent<Transform>();
-        gameCamera = Camera.main;
+        _shipFuelTank = _coreGame.GetComponent<CoreGame>();
+        _debugLogger = GetComponent<DebugLogger>();
+        _shipRigidBody = GetComponent<Rigidbody2D>();
+        _shipRotation = GetComponent<Transform>();
+        _gameCamera = Camera.main;
         
-        initialCameraPosition = gameCamera.transform.position;
-        initialShipPosition = transform.position;
+        _initialCameraPosition = _gameCamera.transform.position;
+        _initialShipPosition = transform.position;
 
-        shipRigidBody.freezeRotation = false;
-        baseScore = 50;
+        _shipRigidBody.freezeRotation = false;
+        _baseScore = 50;
     }
 
     void Update()
     {
-        shipVerVelocity = shipRigidBody.velocity.y;
+        _shipVerVelocity = _shipRigidBody.velocity.y;
 
-        if (shipFuelTank.GetFuelAmount() > 0 && shipFuelTank.GetFuelAmount() <= 100)
+        if (_shipFuelTank.GetFuelAmount > 0 && _shipFuelTank.GetFuelAmount <= 100)
         {
-            if (!shipWarningSoundFXSource.isPlaying)
+            if (!_shipWarningSoundFXSource.isPlaying)
             {
-                shipWarningSoundFXSource.PlayOneShot(soundFX[2]);
+                _shipWarningSoundFXSource.PlayOneShot(_soundFX[2]);
                 DebugToCon("Warning Beep");
             }
         }
-        else if (shipFuelTank.GetFuelAmount() <= 0)
+        else if (_shipFuelTank.GetFuelAmount <= 0)
         {
             DebugToCon("The Ship Has Crashed");
-            playerSoundFXSource.PlayOneShot(soundFX[1]);
-            gameBackgroundSound.Stop();
+            _playerSoundFXSource.PlayOneShot(_soundFX[1]);
+            _gameBackgroundSound.Stop();
             gameObject.SetActive(false);
         }
-        DebugToCon("Good To Land: " + goodToLand);
+        DebugToCon("Good To Land: " + _goodToLand);
     }
 
     private void FixedUpdate()
     {
         RaycastHit2D mountain = Physics2D.Raycast(transform.position, Vector2.down, 500, 3);
-        shipCurrentAltitude = Mathf.Floor(shipAltitude * 420);
+        _shipCurrentAltitude = Mathf.Floor(_shipAltitude * 420);
 
         if (mountain.collider != null)
         {
-            shipAltitude = Mathf.Abs(mountain.point.y - transform.position.y);
+            _shipAltitude = Mathf.Abs(mountain.point.y - transform.position.y);
         }
 
-        if (shipCurrentAltitude < 400)
+        if (_shipCurrentAltitude < 400)
         {
-            gameCamera.transform.position = new Vector3(transform.position.x, transform.position.y, -10);
-            gameCamera.orthographicSize = 1.5f;
+            _gameCamera.transform.position = new Vector3(transform.position.x, transform.position.y, -10);
+            _gameCamera.orthographicSize = 1.5f;
         }
         else
         {
-            gameCamera.transform.position = initialCameraPosition;
-            gameCamera.orthographicSize = 5;
+            _gameCamera.transform.position = _initialCameraPosition;
+            _gameCamera.orthographicSize = 5;
         }
     }
 
@@ -94,21 +94,21 @@ public class Ship : MonoBehaviour
     {
         if (collision.gameObject.name == "Mountain")
         {
-            if (!goodToLand)
+            if (!_goodToLand)
             {
-                currentScore += (baseScore - 30);
+                _currentScore += (_baseScore - 30);
                 ShipExplode();
             }
             else
             {
-                if (Mathf.Floor(shipVerVelocity * 100) < -10)
+                if (Mathf.Floor(_shipVerVelocity * 100) < -10)
                 {
-                    currentScore += (baseScore / 2);
+                    _currentScore += (_baseScore / 2);
                     ShipExplode();
                 }
                 else
                 {
-                    currentScore += (baseScore * scoreMultiplier);
+                    _currentScore += (_baseScore * _scoreMultiplier);
 
                     ShipLanded();
                 }
@@ -119,19 +119,19 @@ public class Ship : MonoBehaviour
     private void ShipLanded()
     {
         DebugToCon("Ship Has Successfuly Landed");
-        transform.position = initialShipPosition;
-        shipRigidBody.freezeRotation = true;
-        shipRotation.eulerAngles = new Vector3(0, 0, 0);
+        transform.position = _initialShipPosition;
+        _shipRigidBody.freezeRotation = true;
+        _shipRotation.eulerAngles = new Vector3(0, 0, 0);
      }
 
     private void ShipExplode()
     {
         DebugToCon("The Ship Has Crashed");
-        transform.position = initialShipPosition;
-        shipRigidBody.freezeRotation = true;
-        shipRotation.eulerAngles = new Vector3(0, 0, 0);
-        shipFuelTank.SetFuelAmount( shipFuelTank.GetFuelAmount() - 100);
-        playerSoundFXSource.PlayOneShot(soundFX[1]);
+        transform.position = _initialShipPosition;
+        _shipRigidBody.freezeRotation = true;
+        _shipRotation.eulerAngles = new Vector3(0, 0, 0);
+        _shipFuelTank.SetFuelAmount(_shipFuelTank.GetFuelAmount - 100);
+        _playerSoundFXSource.PlayOneShot(_soundFX[1]);
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -139,8 +139,8 @@ public class Ship : MonoBehaviour
         if (collision.CompareTag("Bonus"))
         {
             DebugToCon("You are touching a Bonus");
-            scoreMultiplier = collision.GetComponent<RandomBonus>().GetBonusRandom();
-            goodToLand = true;
+            _scoreMultiplier = collision.GetComponent<RandomBonus>().GetBonusRandom;
+            _goodToLand = true;
         }
     }
 
@@ -148,14 +148,14 @@ public class Ship : MonoBehaviour
     {
         if (collision.CompareTag("Bonus"))
         {
-            goodToLand = false;
+            _goodToLand = false;
         }
     }
     private void DebugToCon(object message)
     {
-        if (debugLogger)
+        if (_debugLogger)
         {
-            debugLogger.DebugCon(message, this);
+            _debugLogger.DebugCon(message, this);
         }
     }
 }

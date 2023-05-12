@@ -14,7 +14,7 @@ public class RandomBonus : MonoBehaviour
     private int bonusRandom;
     private float myTime;
 
-    public int GetBonusRandom() => bonusRandom;
+    public int GetBonusRandom => bonusRandom;
 
     void Start()
     {

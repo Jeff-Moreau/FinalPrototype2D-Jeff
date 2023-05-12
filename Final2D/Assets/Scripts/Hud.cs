@@ -18,7 +18,7 @@ public class Hud : MonoBehaviour
 
     private float timerBlink;
     private float scoreNow;
- 
+
     public void SetTimeTotal(string time) => timeTotal.text = time;
     public void SetFuelTotal(string fuel) => fuelTotal.text = fuel;
     public void SetAltitudeCurrent(string altitude) => shipAltitudeCurrent.text = altitude;
@@ -59,7 +59,7 @@ public class Hud : MonoBehaviour
 
     private void CurrentScore()
     {
-        scoreNow = thePlayer.GetCurrentScore();
+        scoreNow = thePlayer.GetCurrentScore;
 
         if (scoreNow == 0)
         {

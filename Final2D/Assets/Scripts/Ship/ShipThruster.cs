@@ -5,15 +5,15 @@ using UnityEngine;
 public class ShipThruster : MonoBehaviour
 {
 
-    private DebugLogger debugLogger;
-    private SpriteRenderer spriteRenderer;
-    private AudioSource thrusterAudioSource;
+    private DebugLogger _debugLogger;
+    private SpriteRenderer _spriteRenderer;
+    private AudioSource _thrusterAudioSource;
 
     private void Start()
     {
-        debugLogger = GetComponent<DebugLogger>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        thrusterAudioSource = GetComponent<AudioSource>();
+        _debugLogger = GetComponent<DebugLogger>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _thrusterAudioSource = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -23,7 +23,7 @@ public class ShipThruster : MonoBehaviour
 
     private void TurnThrusterSoundOn()
     {
-        if (spriteRenderer.enabled)
+        if (_spriteRenderer.enabled)
         {
             ThrusterSoundOn();
         }
@@ -35,9 +35,9 @@ public class ShipThruster : MonoBehaviour
 
     private void ThrusterSoundOff()
     {
-        if (thrusterAudioSource != null)
+        if (_thrusterAudioSource != null)
         {
-            thrusterAudioSource.enabled = false;
+            _thrusterAudioSource.enabled = false;
             DebugToCon("<color=yellow>Turned Thruster AudioSource Off</color>");
         }
         else
@@ -48,9 +48,9 @@ public class ShipThruster : MonoBehaviour
 
     private void ThrusterSoundOn()
     {
-        if (thrusterAudioSource != null)
+        if (_thrusterAudioSource != null)
         {
-            thrusterAudioSource.enabled = true;
+            _thrusterAudioSource.enabled = true;
             DebugToCon("<color=green>Turned Thruster AudioSource On</color>");
         }
         else
@@ -61,9 +61,9 @@ public class ShipThruster : MonoBehaviour
 
     private void DebugToCon(object message)
     {
-        if (debugLogger)
+        if (_debugLogger)
         {
-            debugLogger.DebugCon(message, this);
+            _debugLogger.DebugCon(message, this);
         }
     }
 }

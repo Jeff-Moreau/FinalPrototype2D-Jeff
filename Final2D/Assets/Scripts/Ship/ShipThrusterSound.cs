@@ -5,17 +5,17 @@ using UnityEngine;
 public class ShipThrusterSound : MonoBehaviour
 {
 
-    [SerializeField] private AudioClip thrusterSound;
+    [SerializeField] private AudioClip _thrusterSound;
 
-    private DebugLogger debugLogger;
-    private AudioSource thrusterAudioSource;
+    private DebugLogger _debugLogger;
+    private AudioSource _thrusterAudioSource;
 
-    private bool thrusterAudioSourceIsActive = false;
+    private bool _thrusterAudioSourceIsActive = false;
 
     private void Start()
     {
-        debugLogger = GetComponent<DebugLogger>();
-        thrusterAudioSource = GetComponent<AudioSource>();
+        _debugLogger = GetComponent<DebugLogger>();
+        _thrusterAudioSource = GetComponent<AudioSource>();
 
         ThrusterAudioSourceCheck();
     }
@@ -27,25 +27,25 @@ public class ShipThrusterSound : MonoBehaviour
 
     private void ThrusterAudioSourceCheck()
     {
-        if (thrusterAudioSource != null)
+        if (_thrusterAudioSource != null)
         {
-            thrusterAudioSource.loop = true;
-            thrusterAudioSourceIsActive = true;
+            _thrusterAudioSource.loop = true;
+            _thrusterAudioSourceIsActive = true;
         }
         else
         {
-            thrusterAudioSourceIsActive = false;
+            _thrusterAudioSourceIsActive = false;
             DebugToCon("<color=red>No AudioSource available to play Thruster Sound.</color>");
         }
     }
 
     private void ThrusterSoundPlay()
     {
-            if (thrusterAudioSourceIsActive && thrusterAudioSource.enabled)
+            if (_thrusterAudioSourceIsActive && _thrusterAudioSource.enabled)
             {
-                if (!thrusterAudioSource.isPlaying)
+                if (!_thrusterAudioSource.isPlaying)
                 {
-                    thrusterAudioSource.PlayOneShot(thrusterSound);
+                    _thrusterAudioSource.PlayOneShot(_thrusterSound);
                     DebugToCon("<color=orange>Thruster Sound is Playing</color>");
                 }
             }
@@ -53,9 +53,9 @@ public class ShipThrusterSound : MonoBehaviour
 
     private void DebugToCon(object message)
     {
-        if (debugLogger)
+        if (_debugLogger)
         {
-            debugLogger.DebugCon(message, this);
+            _debugLogger.DebugCon(message, this);
         }
     }
 }

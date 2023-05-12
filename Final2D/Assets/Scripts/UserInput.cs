@@ -6,31 +6,24 @@ using UnityEngine;
 public class UserInput : MonoBehaviour
 {
 
-    private KeyCode rotateLeft;
-    private KeyCode rotateRight;
-    private KeyCode thrusterOn;
+    private bool _leftTurn;
+    private bool _rightTurn;
+    private bool _thrusterOn;
+    private bool _thrusterOff;
+    private bool _insertCoin;
 
-    public bool LeftTurn {  get; private set; }
-    public bool RightTurn { get; private set; }
-    public bool Thruster { get; private set; }
-    public bool ThrusterOff { get; private set; }
+    public bool GetLeftTurn =>  _leftTurn;
+    public bool GetRightTurn => _rightTurn;
+    public bool GetThrusterOn => _thrusterOn;
+    public bool GetThrusterOff => _thrusterOff;
+    public bool GetInsertCoin => _insertCoin;
 
-    private void Start()
-    {
-        rotateLeft = KeyCode.A;
-        rotateRight = KeyCode.D;
-        thrusterOn = KeyCode.W;
-    }
     void Update()
     {
-        GetKeyInput();
-    }
-
-    private void GetKeyInput()
-    {
-        LeftTurn = Input.GetKeyDown(rotateLeft);
-        RightTurn = Input.GetKeyDown(rotateRight);
-        Thruster = Input.GetKey(thrusterOn);
-        ThrusterOff = Input.GetKeyUp(thrusterOn);
+        _leftTurn = Input.GetKeyDown(KeyCode.A);
+        _rightTurn = Input.GetKeyDown(KeyCode.D);
+        _thrusterOn = Input.GetKey(KeyCode.W);
+        _thrusterOff = Input.GetKeyUp(KeyCode.W);
+        _insertCoin = Input.GetKeyDown(KeyCode.Return);
     }
 }
