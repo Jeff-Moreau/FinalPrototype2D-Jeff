@@ -20,6 +20,9 @@ public class UserInput : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetMouseButtonDown(0))
+
+
         _leftTurn = Input.GetKeyDown(KeyCode.A);
         _rightTurn = Input.GetKeyDown(KeyCode.D);
         _thrusterOn = Input.GetKey(KeyCode.W);

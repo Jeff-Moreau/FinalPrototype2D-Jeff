@@ -13,8 +13,8 @@ public class CoreGame : MonoBehaviour
     private Rigidbody2D _shipRigidBody;
 
     private int _fuelAmount;
-    private float _playerHorVelocity;
-    private float _playerVerVelocity;
+    private float _shipHorVelocity;
+    private float _shipVerVelocity;
     private float _gameTimeMinutes;
     private float _gameTimeSeconds;
     private float _gameTime;
@@ -91,18 +91,18 @@ public class CoreGame : MonoBehaviour
 
     private void VerArrows()
     {
-        _playerVerVelocity = _shipRigidBody.velocity.y;
-        _writeToHud.SetShipVerSpeedCurrent(Mathf.Floor(_playerVerVelocity * 100).ToString());
+        _shipVerVelocity = _shipRigidBody.velocity.y;
+        _writeToHud.SetShipVerSpeedCurrent(Mathf.Floor(_shipVerVelocity * 100).ToString());
 
-        if (_playerVerVelocity > 0)
+        if (_shipVerVelocity > 0)
         {
             _writeToHud.SetVerSpeedArrow("↑");
         }
-        else if (_playerVerVelocity < 0)
+        else if (_shipVerVelocity < 0)
         {
             _writeToHud.SetVerSpeedArrow("↓");
         }
-        else if (_playerVerVelocity == 0 || _playerVerVelocity == 1)
+        else if (_shipVerVelocity == 0 || _shipVerVelocity == 1)
         {
             _writeToHud.SetVerSpeedArrow("");
         }
@@ -110,18 +110,18 @@ public class CoreGame : MonoBehaviour
 
     private void HorArrows()
     {
-        _playerHorVelocity = _shipRigidBody.velocity.x;
-        _writeToHud.SetShipHorSpeedCurrent(Mathf.Floor(_playerHorVelocity * 100).ToString());
+        _shipHorVelocity = _shipRigidBody.velocity.x;
+        _writeToHud.SetShipHorSpeedCurrent(Mathf.Floor(_shipHorVelocity * 100).ToString());
 
-        if (_playerHorVelocity > 0)
+        if (_shipHorVelocity > 0)
         {
             _writeToHud.SetHorSpeedArrow("→");
         }
-        else if (_playerHorVelocity < 0)
+        else if (_shipHorVelocity < 0)
         {
             _writeToHud.SetHorSpeedArrow("←");
         }
-        else if (_playerHorVelocity == 0 || _playerHorVelocity == 1)
+        else if (_shipHorVelocity == 0 || _shipHorVelocity == 1)
         {
             _writeToHud.SetHorSpeedArrow("");
         }

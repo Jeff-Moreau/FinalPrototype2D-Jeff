@@ -12,7 +12,6 @@ public class Ship : MonoBehaviour
     [SerializeField] private GameObject _coreGame;
     [SerializeField] private GameObject _theThruster;
 
-    private CoreGame _shipFuelTank;
     private DebugLogger _debugLogger;
     private Rigidbody2D _shipRigidBody;
     private Camera _gameCamera;
@@ -21,28 +20,41 @@ public class Ship : MonoBehaviour
     private int _currentScore;
     private int _scoreMultiplier;
     private int _baseScore;
+
+    private float _shipFuelTankCapacity;
+    private float _shipCurrentFuelInTank;
+    private float _shipFuelTankWarningLevel;
+    private float _shipFuelTankEmpty;
+
     private float _shipCurrentAltitude;
     private float _shipAltitude;
     private float _shipVerVelocity;
+
     private Vector3 _initialShipPosition;
     private Vector3 _initialCameraPosition;
     private bool _goodToLand = false;
 
     public int GetCurrentScore => _currentScore;
     public float GetShipAltitude => _shipAltitude;
-
+    public float GetShipVerVelocity => _shipVerVelocity;
+    public float GetShipFuelCapacity => _shipFuelTankCapacity;
     void Start()
     {
-        _shipFuelTank = _coreGame.GetComponent<CoreGame>();
+
         _debugLogger = GetComponent<DebugLogger>();
         _shipRigidBody = GetComponent<Rigidbody2D>();
         _shipRotation = GetComponent<Transform>();
         _gameCamera = Camera.main;
-        
+
+
         _initialCameraPosition = _gameCamera.transform.position;
         _initialShipPosition = transform.position;
 
         _shipRigidBody.freezeRotation = false;
+        _shipCurrentFuelInTank = 750;
+        _shipFuelTankCapacity = 6000;
+        _shipFuelTankWarningLevel = 100;
+        _shipFuelTankEmpty = 0;
         _baseScore = 50;
     }
 
@@ -50,7 +62,7 @@ public class Ship : MonoBehaviour
     {
         _shipVerVelocity = _shipRigidBody.velocity.y;
 
-        if (_shipFuelTank.GetFuelAmount > 0 && _shipFuelTank.GetFuelAmount <= 100)
+        if (_shipCurrentFuelInTank > _shipFuelTankEmpty && _shipCurrentFuelInTank <= _shipFuelTankWarningLevel)
         {
             if (!_shipWarningSoundFXSource.isPlaying)
             {
@@ -58,7 +70,7 @@ public class Ship : MonoBehaviour
                 DebugToCon("Warning Beep");
             }
         }
-        else if (_shipFuelTank.GetFuelAmount <= 0)
+        else if (_shipCurrentFuelInTank <= _shipFuelTankEmpty)
         {
             DebugToCon("The Ship Has Crashed");
             _playerSoundFXSource.PlayOneShot(_soundFX[1]);
@@ -130,7 +142,7 @@ public class Ship : MonoBehaviour
         transform.position = _initialShipPosition;
         _shipRigidBody.freezeRotation = true;
         _shipRotation.eulerAngles = new Vector3(0, 0, 0);
-        _shipFuelTank.SetFuelAmount(_shipFuelTank.GetFuelAmount - 100);
+        _shipCurrentFuelInTank -= _shipFuelTankWarningLevel;
         _playerSoundFXSource.PlayOneShot(_soundFX[1]);
     }
 
