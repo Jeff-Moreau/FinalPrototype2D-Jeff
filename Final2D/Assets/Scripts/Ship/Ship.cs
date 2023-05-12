@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Ship : MonoBehaviour
 {
+    public static Ship instance;
 
     [SerializeField] private AudioSource _playerSoundFXSource;
     [SerializeField] private AudioSource _shipWarningSoundFXSource;
@@ -40,7 +41,7 @@ public class Ship : MonoBehaviour
     public void SetShipCurrentFuelInTank(int fuel) => _shipCurrentFuelInTank = fuel;
     void Start()
     {
-
+        instance = this;
         _debugLogger = GetComponent<DebugLogger>();
         _shipRigidBody = GetComponent<Rigidbody2D>();
         _shipRotation = GetComponent<Transform>();

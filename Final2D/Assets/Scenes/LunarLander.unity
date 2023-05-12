@@ -2760,7 +2760,10 @@ MonoBehaviour:
   _playerSoundFXSource: {fileID: 58680735}
   _shipWarningSoundFXSource: {fileID: 1975517774}
   _gameBackgroundSound: {fileID: 1191524448}
-  _soundFX: []
+  _soundFX:
+  - {fileID: 8300000, guid: 64e5fcda0078a6047974d44d7add69c6, type: 3}
+  - {fileID: 8300000, guid: 15bbe9d2c2eb358488f269af97f8eb6a, type: 3}
+  - {fileID: 8300000, guid: c7432109a42fe904b82de0404d8766f2, type: 3}
 --- !u!212 &915830174
 SpriteRenderer:
   m_ObjectHideFlags: 0

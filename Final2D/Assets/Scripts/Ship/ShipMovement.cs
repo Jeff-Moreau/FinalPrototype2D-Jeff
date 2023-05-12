@@ -14,7 +14,6 @@ public class ShipMovement : MonoBehaviour
     private Transform _shipRotation;
     private Rigidbody2D _shipRigidBody;
     private SpriteRenderer _thrusterToggle;
-    private CoreGame _shipFuelTank;
 
     private int _fuelUsage;
     private float _shipRotationSpeed;
@@ -22,13 +21,12 @@ public class ShipMovement : MonoBehaviour
 
     private void Start()
     {
-        _ship = GetComponent<Ship>();
+        _ship = Ship.instance;
         _debugLogger = GetComponent<DebugLogger>();
         _userInput = _coreGame.GetComponent<UserInput>();
         _shipRotation = GetComponent<Transform>();
         _shipRigidBody = GetComponent<Rigidbody2D>();
         _thrusterToggle = _theThruster.GetComponent<SpriteRenderer>();
-        _shipFuelTank = _coreGame.GetComponent<CoreGame>();
 
         _fuelUsage = 1;
         _shipRotationSpeed = 15;
