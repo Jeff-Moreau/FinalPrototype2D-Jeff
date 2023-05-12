@@ -6,15 +6,21 @@ using UnityEngine;
 public class UserInput : MonoBehaviour
 {
 
-    [SerializeField] private KeyCode rotateLeft;
-    [SerializeField] private KeyCode rotateRight;
-    [SerializeField] private KeyCode thrusterOn;
+    private KeyCode rotateLeft;
+    private KeyCode rotateRight;
+    private KeyCode thrusterOn;
 
     public bool LeftTurn {  get; private set; }
     public bool RightTurn { get; private set; }
     public bool Thruster { get; private set; }
     public bool ThrusterOff { get; private set; }
 
+    private void Start()
+    {
+        rotateLeft = KeyCode.A;
+        rotateRight = KeyCode.D;
+        thrusterOn = KeyCode.W;
+    }
     void Update()
     {
         GetKeyInput();

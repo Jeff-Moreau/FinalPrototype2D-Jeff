@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour
     private Transform shipRotation;
     private Rigidbody2D shipRigidBody;
     private SpriteRenderer thrusterToggle;
-    private GameLoop gameLoop;
+    private GameLoop shipFuelTank;
 
     private int fuelUsage;
     private float shipRotationSpeed;
@@ -25,8 +25,8 @@ public class PlayerMovement : MonoBehaviour
         userInput = coreGame.GetComponent<UserInput>();
         shipRotation = GetComponent<Transform>();
         shipRigidBody = GetComponent<Rigidbody2D>();
-        thrusterToggle = theThruster.gameObject.GetComponent<SpriteRenderer>();
-        gameLoop = coreGame.GetComponent<GameLoop>();
+        thrusterToggle = theThruster.GetComponent<SpriteRenderer>();
+        shipFuelTank = coreGame.GetComponent<GameLoop>();
 
         fuelUsage = 1;
         shipRotationSpeed = 15;
@@ -57,7 +57,7 @@ public class PlayerMovement : MonoBehaviour
         {
             thrusterToggle.enabled = true;
             shipRigidBody.AddForce(transform.up * thrusterForce);
-            gameLoop.fuelAmount -= fuelUsage;
+            shipFuelTank.fuelAmount -= fuelUsage;
         }
     }
 

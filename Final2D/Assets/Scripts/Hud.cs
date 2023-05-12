@@ -5,32 +5,67 @@ using UnityEngine;
 
 public class Hud : MonoBehaviour
 {
-    [SerializeField] public TextMeshProUGUI scoreTotal;
-    [SerializeField] public TextMeshProUGUI timeTotal;
-    [SerializeField] public TextMeshProUGUI fuelTotal;
-    [SerializeField] public TextMeshProUGUI altitudeCurrent;
-    [SerializeField] public TextMeshProUGUI horSpeedCurrent;
-    [SerializeField] public TextMeshProUGUI verSpeedCurrent;
-    [SerializeField] public TextMeshProUGUI horSpeedArrow;
-    [SerializeField] public TextMeshProUGUI verSpeedArrow;
+    [SerializeField] private TextMeshProUGUI scoreTotal;
+    [SerializeField] private TextMeshProUGUI timeTotal;
+    [SerializeField] private TextMeshProUGUI fuelTotal;
+    [SerializeField] private TextMeshProUGUI shipAltitudeCurrent;
+    [SerializeField] private TextMeshProUGUI shipHorSpeedCurrent;
+    [SerializeField] private TextMeshProUGUI shipVerSpeedCurrent;
+    [SerializeField] private TextMeshProUGUI horSpeedArrow;
+    [SerializeField] private TextMeshProUGUI verSpeedArrow;
     [SerializeField] private TextMeshProUGUI insertCoins;
     [SerializeField] private GameObject thePlayer;
 
     private float timerBlink;
     private float scoreNow;
-    // Start is called before the first frame update
-    void Start()
+ 
+    public void SetTimeTotal(string time)
+    {
+        timeTotal.text = time;
+    }
+
+    public void SetFuelTotal(string fuel)
+    {
+        fuelTotal.text = fuel;
+    }
+
+    public void SetAltitudeCurrent(string altitude)
+    {
+        shipAltitudeCurrent.text = altitude;
+    }
+
+    public void SetShipHorSpeedCurrent(string horSpeed)
+    {
+        shipHorSpeedCurrent.text = horSpeed;
+    }
+
+    public void SetShipVerSpeedCurrent(string verSpeed)
+    {
+        shipVerSpeedCurrent.text = verSpeed;
+    }
+
+    public void SetHorSpeedArrow(string horArrow)
+    {
+        horSpeedArrow.text = horArrow;
+    }
+
+    public void SetVerSpeedArrow(string verArrow)
+    {
+        verSpeedArrow.text = verArrow;
+    }
+
+    private void Start()
     {
         fuelTotal.text = "0000";
         timerBlink = 0;
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         timerBlink += Time.deltaTime;
 
-        scoreNow = thePlayer.GetComponent<Player>().currentScore;
+        scoreNow = thePlayer.GetComponent<Player>().GetCurrentScore();
 
         if (timerBlink < 1.5f)
         {
@@ -56,7 +91,5 @@ public class Hud : MonoBehaviour
         {
             scoreTotal.text = "0" + scoreNow;
         }
-
-
     }
 }

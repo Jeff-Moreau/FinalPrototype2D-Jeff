@@ -8,6 +8,8 @@ public class GameLoop : MonoBehaviour
     [SerializeField] private Camera mainCam;
     [SerializeField] private GameObject theHUD;
 
+    private Hud writeToHud;
+
     public int fuelAmount;
 
     private float playerHorVelocity;
@@ -16,11 +18,12 @@ public class GameLoop : MonoBehaviour
     private float gameTimeSeconds;
     private float gameSeconds;
     private float gameMinutes;
-    private float altitudeNow;
+    private float shipCurrentAltitude;
     private string newSeconds;
 
     void Start()
     {
+        writeToHud = theHUD.GetComponent<Hud>();
         fuelAmount = 750;
         gameMinutes = 0;
     }
@@ -30,9 +33,9 @@ public class GameLoop : MonoBehaviour
         gameTimeMinutes += Time.deltaTime;
         gameTimeSeconds += Time.deltaTime;
 
-        theHUD.GetComponent<Hud>().fuelTotal.text = fuelAmount.ToString();
-        altitudeNow = thePlayer.GetComponent<Player>().altitude;
-        theHUD.GetComponent<Hud>().altitudeCurrent.text = "" + Mathf.Floor(altitudeNow * 420);
+        writeToHud.SetFuelTotal(fuelAmount.ToString());
+        shipCurrentAltitude = thePlayer.GetComponent<Player>().GetShipAltitude();
+        writeToHud.SetAltitudeCurrent("" + Mathf.Floor(shipCurrentAltitude * 420));
 
         HorArrows();
         VerArrows();
@@ -72,44 +75,44 @@ public class GameLoop : MonoBehaviour
             gameTimeMinutes = 0;
         }
 
-        theHUD.GetComponent<Hud>().timeTotal.text = "0" + gameMinutes + ":" + newSeconds;
+        writeToHud.SetTimeTotal("0" + gameMinutes + ":" + newSeconds);
     }
 
     private void VerArrows()
     {
         playerVerVelocity = thePlayer.GetComponent<Rigidbody2D>().velocity.y;
-        theHUD.GetComponent<Hud>().verSpeedCurrent.text = "" + Mathf.Floor(playerVerVelocity * 100);
+        writeToHud.SetShipVerSpeedCurrent("" + Mathf.Floor(playerVerVelocity * 100));
 
         if (playerVerVelocity > 0)
         {
-            theHUD.GetComponent<Hud>().verSpeedArrow.text = "↑";
+            writeToHud.SetVerSpeedArrow("↑");
         }
         else if (playerVerVelocity < 0)
         {
-            theHUD.GetComponent<Hud>().verSpeedArrow.text = "↓";
+            writeToHud.SetVerSpeedArrow("↓");
         }
         else if (playerVerVelocity == 0 || playerVerVelocity == 1)
         {
-            theHUD.GetComponent<Hud>().verSpeedArrow.text = "";
+            writeToHud.SetVerSpeedArrow("");
         }
     }
 
     private void HorArrows()
     {
         playerHorVelocity = thePlayer.GetComponent<Rigidbody2D>().velocity.x;
-        theHUD.GetComponent<Hud>().horSpeedCurrent.text = "" + Mathf.Floor(playerHorVelocity * 100);
+        writeToHud.SetShipHorSpeedCurrent("" + Mathf.Floor(playerHorVelocity * 100));
 
         if (playerHorVelocity > 0)
         {
-            theHUD.GetComponent<Hud>().horSpeedArrow.text = "→";
+            writeToHud.SetHorSpeedArrow("→");
         }
         else if (playerHorVelocity < 0)
         {
-            theHUD.GetComponent<Hud>().horSpeedArrow.text = "←";
+            writeToHud.SetHorSpeedArrow("←");
         }
         else if (playerHorVelocity == 0 || playerHorVelocity == 1)
         {
-            theHUD.GetComponent<Hud>().horSpeedArrow.text = "";
+            writeToHud.SetHorSpeedArrow("");
         }
     }
 }

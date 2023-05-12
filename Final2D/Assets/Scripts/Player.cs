@@ -11,42 +11,51 @@ public class Player : MonoBehaviour
     [SerializeField] private AudioClip[] soundFX;
     [SerializeField] private GameObject coreGame;
     [SerializeField] private GameObject theThruster;
-    //[SerializeField] private GameObject theHUD;
 
-    public int currentScore;
-    public float altitude;
-    public float locHit;
-    public float altitudeNow;
-
+    private GameLoop shipFuelTank;
     private DebugLogger debugLogger;
-    private Rigidbody2D myRigidBody; 
+    private Rigidbody2D shipRigidBody;
     private Camera gameCamera;
-
+    
+    private int currentScore;
     private int multiplyScore;
     private int baseScore;
-    private float playerVerVelocity;
-    private Vector3 initialPosition;
-    private Vector3 initialCamPosition;
+    private float shipCurrentAltitude;
+    private float shipAltitude;
+    private float shipVerVelocity;
+    private Vector3 initialShipPosition;
+    private Vector3 initialCameraPosition;
     private bool goodToLand = false;
+
+    public int GetCurrentScore()
+    {
+        return currentScore;
+    }
+
+    public float GetShipAltitude()
+    {
+        return shipAltitude;
+    }
 
     void Start()
     {
+        shipFuelTank = coreGame.GetComponent<GameLoop>();
         debugLogger = GetComponent<DebugLogger>();
-        myRigidBody = GetComponent<Rigidbody2D>();
+        shipRigidBody = GetComponent<Rigidbody2D>();
         gameCamera = Camera.main;
 
-        initialCamPosition = gameCamera.transform.position;
-        initialPosition = transform.position;
+        initialCameraPosition = gameCamera.transform.position;
+        initialShipPosition = transform.position;
 
-        myRigidBody.freezeRotation = false;
+        shipRigidBody.freezeRotation = false;
         baseScore = 50;
     }
 
     void Update()
     {
-        playerVerVelocity = myRigidBody.velocity.y;
+        shipVerVelocity = shipRigidBody.velocity.y;
 
-        if (coreGame.GetComponent<GameLoop>().fuelAmount >0 && coreGame.GetComponent<GameLoop>().fuelAmount <= 100)
+        if (shipFuelTank.fuelAmount >0 && shipFuelTank.fuelAmount <= 100)
         {
             if (!shipWarningSoundFXSource.isPlaying)
             {
@@ -54,7 +63,7 @@ public class Player : MonoBehaviour
                 DebugToCon("Warning Beep");
             }
         }
-        else if (coreGame.GetComponent<GameLoop>().fuelAmount <= 0)
+        else if (shipFuelTank.fuelAmount <= 0)
         {
             DebugToCon("The Ship Has Crashed");
             playerSoundFXSource.PlayOneShot(soundFX[1]);
@@ -66,23 +75,22 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        RaycastHit2D ground = Physics2D.Raycast(transform.position, Vector2.down, 500, 3);
-        altitudeNow = Mathf.Floor(altitude * 420);
+        RaycastHit2D mountain = Physics2D.Raycast(transform.position, Vector2.down, 500, 3);
+        shipCurrentAltitude = Mathf.Floor(shipAltitude * 420);
 
-        if (ground.collider != null)
+        if (mountain.collider != null)
         {
-            locHit = ground.point.y;
-            altitude = Mathf.Abs(ground.point.y - transform.position.y);
+            shipAltitude = Mathf.Abs(mountain.point.y - transform.position.y);
         }
 
-        if (altitudeNow < 400)
+        if (shipCurrentAltitude < 400)
         {
             gameCamera.transform.position = new Vector3(transform.position.x, transform.position.y, -10);
             gameCamera.GetComponent<Camera>().orthographicSize = 1.5f;
         }
         else
         {
-            gameCamera.transform.position = initialCamPosition;
+            gameCamera.transform.position = initialCameraPosition;
             gameCamera.GetComponent<Camera>().orthographicSize = 5;
         }
     }
@@ -98,7 +106,7 @@ public class Player : MonoBehaviour
             }
             else
             {
-                if (Mathf.Floor(playerVerVelocity * 100) < -10)
+                if (Mathf.Floor(shipVerVelocity * 100) < -10)
                 {
                     currentScore += (baseScore / 2);
                     ShipExplode();
@@ -116,7 +124,7 @@ public class Player : MonoBehaviour
     private void ShipLanded()
     {
         DebugToCon("Ship Has Successfuly Landed");
-        transform.position = initialPosition;
+        transform.position = initialShipPosition;
         GetComponent<Rigidbody2D>().freezeRotation = true;
         GetComponent<Transform>().eulerAngles = new Vector3(0, 0, 0);
      }
@@ -124,7 +132,7 @@ public class Player : MonoBehaviour
     private void ShipExplode()
     {
         DebugToCon("The Ship Has Crashed");
-        transform.position = initialPosition;
+        transform.position = initialShipPosition;
         GetComponent<Rigidbody2D>().freezeRotation = true;
         GetComponent<Transform>().eulerAngles = new Vector3(0, 0, 0);
         coreGame.GetComponent<GameLoop>().fuelAmount -= 100;
