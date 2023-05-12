@@ -7,7 +7,7 @@ public class GameLoop : MonoBehaviour
     [SerializeField] private GameObject theShip;
     [SerializeField] private GameObject theHUD;
 
-    private Player shipAltitude;
+    private Ship shipAltitude;
     private Hud writeToHud;
     private Rigidbody2D shipRigidBody;
 
@@ -27,7 +27,7 @@ public class GameLoop : MonoBehaviour
     void Start()
     {
         shipRigidBody = theShip.GetComponent<Rigidbody2D>();
-        shipAltitude = theShip.GetComponent<Player>();
+        shipAltitude = theShip.GetComponent<Ship>();
         writeToHud = theHUD.GetComponent<Hud>();
         fuelAmount = 750;
         gameMinutes = 0;

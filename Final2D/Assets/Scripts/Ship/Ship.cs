@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Ship : MonoBehaviour
 {
 
     [SerializeField] private AudioSource playerSoundFXSource;
@@ -136,7 +136,7 @@ public class Player : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.tag == "Bonus")
+        if (collision.CompareTag("Bonus"))
         {
             DebugToCon("You are touching a Bonus");
             scoreMultiplier = collision.GetComponent<RandomBonus>().GetBonusRandom();
@@ -146,7 +146,7 @@ public class Player : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.tag == "Bonus")
+        if (collision.CompareTag("Bonus"))
         {
             goodToLand = false;
         }

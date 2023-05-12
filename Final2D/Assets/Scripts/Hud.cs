@@ -14,7 +14,7 @@ public class Hud : MonoBehaviour
     [SerializeField] private TextMeshProUGUI horSpeedArrow;
     [SerializeField] private TextMeshProUGUI verSpeedArrow;
     [SerializeField] private TextMeshProUGUI insertCoins;
-    [SerializeField] private Player thePlayer;
+    [SerializeField] private Ship thePlayer;
 
     private float timerBlink;
     private float scoreNow;
