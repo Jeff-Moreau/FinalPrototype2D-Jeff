@@ -9,8 +9,6 @@ public class Ship : MonoBehaviour
     [SerializeField] private AudioSource _shipWarningSoundFXSource;
     [SerializeField] private AudioSource _gameBackgroundSound;
     [SerializeField] private AudioClip[] _soundFX;
-    [SerializeField] private GameObject _coreGame;
-    [SerializeField] private GameObject _theThruster;
 
     private DebugLogger _debugLogger;
     private Rigidbody2D _shipRigidBody;
@@ -21,10 +19,10 @@ public class Ship : MonoBehaviour
     private int _scoreMultiplier;
     private int _baseScore;
 
-    private float _shipFuelTankCapacity;
-    private float _shipCurrentFuelInTank;
-    private float _shipFuelTankWarningLevel;
-    private float _shipFuelTankEmpty;
+    private int _shipFuelTankCapacity;
+    private int _shipCurrentFuelInTank;
+    private int _shipFuelTankWarningLevel;
+    private int _shipFuelTankEmpty;
 
     private float _shipCurrentAltitude;
     private float _shipAltitude;
@@ -37,7 +35,9 @@ public class Ship : MonoBehaviour
     public int GetCurrentScore => _currentScore;
     public float GetShipAltitude => _shipAltitude;
     public float GetShipVerVelocity => _shipVerVelocity;
-    public float GetShipFuelCapacity => _shipFuelTankCapacity;
+    public int GetShipFuelCapacity => _shipFuelTankCapacity;
+    public int GetShipCurrentFuelInTank => _shipCurrentFuelInTank;
+    public void SetShipCurrentFuelInTank(int fuel) => _shipCurrentFuelInTank = fuel;
     void Start()
     {
 
@@ -45,11 +45,8 @@ public class Ship : MonoBehaviour
         _shipRigidBody = GetComponent<Rigidbody2D>();
         _shipRotation = GetComponent<Transform>();
         _gameCamera = Camera.main;
-
-
         _initialCameraPosition = _gameCamera.transform.position;
         _initialShipPosition = transform.position;
-
         _shipRigidBody.freezeRotation = false;
         _shipCurrentFuelInTank = 750;
         _shipFuelTankCapacity = 6000;
@@ -77,7 +74,16 @@ public class Ship : MonoBehaviour
             _gameBackgroundSound.Stop();
             gameObject.SetActive(false);
         }
-        DebugToCon("Good To Land: " + _goodToLand);
+
+        ShipTankIsEmpty();
+    }
+
+    private void ShipTankIsEmpty()
+    {
+        if (_shipCurrentFuelInTank <= 0)
+        {
+            _shipCurrentFuelInTank = 0;
+        }
     }
 
     private void FixedUpdate()

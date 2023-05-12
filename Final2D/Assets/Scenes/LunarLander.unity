@@ -383,7 +383,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bonusText: {fileID: 1998358099}
-  _maxRandom: 0
+  _maxRandom: 4
   _minRandom: 0
 --- !u!1 &58680733
 GameObject:
@@ -1583,7 +1583,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bonusText: {fileID: 109837516}
-  _maxRandom: 0
+  _maxRandom: 3
   _minRandom: 0
 --- !u!1 &350554120
 GameObject:
@@ -1710,7 +1710,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bonusText: {fileID: 1539766544}
-  _maxRandom: 0
+  _maxRandom: 4
   _minRandom: 0
 --- !u!1 &409121147
 GameObject:
@@ -1871,7 +1871,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bonusText: {fileID: 262722464}
-  _maxRandom: 0
+  _maxRandom: 2
   _minRandom: 0
 --- !u!1 &519420028
 GameObject:
@@ -2411,7 +2411,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bonusText: {fileID: 161820933}
-  _maxRandom: 0
+  _maxRandom: 2
   _minRandom: 0
 --- !u!1 &783118406
 GameObject:
@@ -2720,7 +2720,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bonusText: {fileID: 2049920512}
-  _maxRandom: 0
+  _maxRandom: 5
   _minRandom: 0
 --- !u!1 &915830172
 GameObject:
@@ -2761,8 +2761,6 @@ MonoBehaviour:
   _shipWarningSoundFXSource: {fileID: 1975517774}
   _gameBackgroundSound: {fileID: 1191524448}
   _soundFX: []
-  _coreGame: {fileID: 748299852}
-  _theThruster: {fileID: 1547802939}
 --- !u!212 &915830174
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3167,7 +3165,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bonusText: {fileID: 2043048186}
-  _maxRandom: 0
+  _maxRandom: 4
   _minRandom: 0
 --- !u!1 &1069159734
 GameObject:
@@ -4901,7 +4899,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bonusText: {fileID: 169155000}
-  _maxRandom: 0
+  _maxRandom: 5
   _minRandom: 0
 --- !u!1 &1584045567
 GameObject:
@@ -6058,7 +6056,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bonusText: {fileID: 290261617}
-  _maxRandom: 0
+  _maxRandom: 4
   _minRandom: 0
 --- !u!1 &1879882691
 GameObject:
@@ -6320,7 +6318,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bonusText: {fileID: 143339835}
-  _maxRandom: 0
+  _maxRandom: 3
   _minRandom: 0
 --- !u!1 &1904604783
 GameObject:
@@ -6980,7 +6978,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bonusText: {fileID: 1098266519}
-  _maxRandom: 0
+  _maxRandom: 3
   _minRandom: 0
 --- !u!1 &2033431316
 GameObject:
@@ -7107,7 +7105,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bonusText: {fileID: 1512338314}
-  _maxRandom: 0
+  _maxRandom: 3
   _minRandom: 0
 --- !u!1 &2043048184
 GameObject:
@@ -7504,7 +7502,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bonusText: {fileID: 673123980}
-  _maxRandom: 0
+  _maxRandom: 2
   _minRandom: 0
 --- !u!1 &2132412156
 GameObject:

@@ -8,11 +8,10 @@ public class CoreGame : MonoBehaviour
     [SerializeField] private GameObject _theHUD;
 
     private UserInput _userInput;
-    private Ship _shipAltitude;
+    private Ship _ship;
     private Hud _writeToHud;
     private Rigidbody2D _shipRigidBody;
 
-    private int _fuelAmount;
     private float _shipHorVelocity;
     private float _shipVerVelocity;
     private float _gameTimeMinutes;
@@ -23,41 +22,32 @@ public class CoreGame : MonoBehaviour
     private float _shipCurrentAltitude;
     private string _newSeconds;
     
-
-    public int GetFuelAmount => _fuelAmount;
-    public void SetFuelAmount(int changeFuel) => _fuelAmount = changeFuel;
     void Start()
     {
         _userInput = GetComponent<UserInput>();
-        _shipAltitude = _theShip.GetComponent<Ship>();
+        _ship = _theShip.GetComponent<Ship>();
         _writeToHud = _theHUD.GetComponent<Hud>();
         _shipRigidBody = _theShip.GetComponent<Rigidbody2D>();
-
-        _fuelAmount = 750;
-        _gameMinutes = 0;
     }
 
     void Update()
     {
         _gameTime = Time.deltaTime;
 
-        _writeToHud.SetFuelTotal(_fuelAmount.ToString());
-        _shipCurrentAltitude = _shipAltitude.GetShipAltitude;
+        _writeToHud.SetFuelTotal(_ship.GetShipCurrentFuelInTank.ToString());
+        _shipCurrentAltitude = _ship.GetShipAltitude;
         _writeToHud.SetAltitudeCurrent(Mathf.Floor(_shipCurrentAltitude * 420).ToString());
 
         HorArrows();
         VerArrows();
         SettingTime();
 
-        if (_userInput.GetInsertCoin && _fuelAmount < 5250)
+        if (_userInput.GetInsertCoin && _ship.GetShipCurrentFuelInTank <= 5250)
         {
-            _fuelAmount += 750;
+            int fuelPerCoin = 750;
+            _ship.SetShipCurrentFuelInTank(_ship.GetShipCurrentFuelInTank + fuelPerCoin);
         }
 
-        if (_fuelAmount <= 0)
-        {
-            _fuelAmount = 0;
-        }
     }
 
     private void SettingTime()

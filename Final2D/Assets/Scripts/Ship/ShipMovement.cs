@@ -8,6 +8,7 @@ public class ShipMovement : MonoBehaviour
     [SerializeField] private GameObject _coreGame;
     [SerializeField] private GameObject _theThruster;
 
+    private Ship _ship;
     private DebugLogger _debugLogger;
     private UserInput _userInput;
     private Transform _shipRotation;
@@ -21,6 +22,7 @@ public class ShipMovement : MonoBehaviour
 
     private void Start()
     {
+        _ship = GetComponent<Ship>();
         _debugLogger = GetComponent<DebugLogger>();
         _userInput = _coreGame.GetComponent<UserInput>();
         _shipRotation = GetComponent<Transform>();
@@ -57,7 +59,7 @@ public class ShipMovement : MonoBehaviour
         {
             _thrusterToggle.enabled = true;
             _shipRigidBody.AddForce(transform.up * _thrusterForce);
-            _shipFuelTank.SetFuelAmount(_shipFuelTank.GetFuelAmount - _fuelUsage);
+            _ship.SetShipCurrentFuelInTank(_ship.GetShipCurrentFuelInTank - _fuelUsage);
         }
     }
 
