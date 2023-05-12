@@ -14,45 +14,18 @@ public class Hud : MonoBehaviour
     [SerializeField] private TextMeshProUGUI horSpeedArrow;
     [SerializeField] private TextMeshProUGUI verSpeedArrow;
     [SerializeField] private TextMeshProUGUI insertCoins;
-    [SerializeField] private GameObject thePlayer;
+    [SerializeField] private Player thePlayer;
 
     private float timerBlink;
     private float scoreNow;
  
-    public void SetTimeTotal(string time)
-    {
-        timeTotal.text = time;
-    }
-
-    public void SetFuelTotal(string fuel)
-    {
-        fuelTotal.text = fuel;
-    }
-
-    public void SetAltitudeCurrent(string altitude)
-    {
-        shipAltitudeCurrent.text = altitude;
-    }
-
-    public void SetShipHorSpeedCurrent(string horSpeed)
-    {
-        shipHorSpeedCurrent.text = horSpeed;
-    }
-
-    public void SetShipVerSpeedCurrent(string verSpeed)
-    {
-        shipVerSpeedCurrent.text = verSpeed;
-    }
-
-    public void SetHorSpeedArrow(string horArrow)
-    {
-        horSpeedArrow.text = horArrow;
-    }
-
-    public void SetVerSpeedArrow(string verArrow)
-    {
-        verSpeedArrow.text = verArrow;
-    }
+    public void SetTimeTotal(string time) => timeTotal.text = time;
+    public void SetFuelTotal(string fuel) => fuelTotal.text = fuel;
+    public void SetAltitudeCurrent(string altitude) => shipAltitudeCurrent.text = altitude;
+    public void SetShipHorSpeedCurrent(string horSpeed) => shipHorSpeedCurrent.text = horSpeed;
+    public void SetShipVerSpeedCurrent(string verSpeed) => shipVerSpeedCurrent.text = verSpeed;
+    public void SetHorSpeedArrow(string horArrow) => horSpeedArrow.text = horArrow;
+    public void SetVerSpeedArrow(string verArrow) => verSpeedArrow.text = verArrow;
 
     private void Start()
     {
@@ -60,12 +33,15 @@ public class Hud : MonoBehaviour
         timerBlink = 0;
     }
 
-    // Update is called once per frame
     private void Update()
     {
-        timerBlink += Time.deltaTime;
+        CoinBlink();
+        CurrentScore();
+    }
 
-        scoreNow = thePlayer.GetComponent<Player>().GetCurrentScore();
+    private void CoinBlink()
+    {
+        timerBlink += Time.deltaTime;
 
         if (timerBlink < 1.5f)
         {
@@ -79,11 +55,17 @@ public class Hud : MonoBehaviour
         {
             timerBlink = 0;
         }
+    }
+
+    private void CurrentScore()
+    {
+        scoreNow = thePlayer.GetCurrentScore();
+
         if (scoreNow == 0)
         {
             scoreTotal.text = "0000";
         }
-        else if (scoreNow>0&& scoreNow <100)
+        else if (scoreNow > 0 && scoreNow < 100)
         {
             scoreTotal.text = "00" + scoreNow;
         }

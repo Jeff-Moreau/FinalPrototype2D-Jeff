@@ -57,7 +57,7 @@ public class PlayerMovement : MonoBehaviour
         {
             thrusterToggle.enabled = true;
             shipRigidBody.AddForce(transform.up * thrusterForce);
-            shipFuelTank.fuelAmount -= fuelUsage;
+            shipFuelTank.SetFuelAmount(shipFuelTank.GetFuelAmount() - fuelUsage);
         }
     }
 

@@ -4,25 +4,30 @@ using UnityEngine;
 
 public class GameLoop : MonoBehaviour
 {
-    [SerializeField] private GameObject thePlayer;
-    [SerializeField] private Camera mainCam;
+    [SerializeField] private GameObject theShip;
     [SerializeField] private GameObject theHUD;
 
+    private Player shipAltitude;
     private Hud writeToHud;
+    private Rigidbody2D shipRigidBody;
 
-    public int fuelAmount;
-
+    private int fuelAmount;
     private float playerHorVelocity;
     private float playerVerVelocity;
     private float gameTimeMinutes;
     private float gameTimeSeconds;
+    private float gameTime;
     private float gameSeconds;
     private float gameMinutes;
     private float shipCurrentAltitude;
     private string newSeconds;
 
+    public int GetFuelAmount() => fuelAmount;
+    public void SetFuelAmount(int changeFuel) => fuelAmount = changeFuel;
     void Start()
     {
+        shipRigidBody = theShip.GetComponent<Rigidbody2D>();
+        shipAltitude = theShip.GetComponent<Player>();
         writeToHud = theHUD.GetComponent<Hud>();
         fuelAmount = 750;
         gameMinutes = 0;
@@ -30,12 +35,11 @@ public class GameLoop : MonoBehaviour
 
     void Update()
     {
-        gameTimeMinutes += Time.deltaTime;
-        gameTimeSeconds += Time.deltaTime;
+        gameTime = Time.deltaTime;
 
         writeToHud.SetFuelTotal(fuelAmount.ToString());
-        shipCurrentAltitude = thePlayer.GetComponent<Player>().GetShipAltitude();
-        writeToHud.SetAltitudeCurrent("" + Mathf.Floor(shipCurrentAltitude * 420));
+        shipCurrentAltitude = shipAltitude.GetShipAltitude();
+        writeToHud.SetAltitudeCurrent(Mathf.Floor(shipCurrentAltitude * 420).ToString());
 
         HorArrows();
         VerArrows();
@@ -54,6 +58,9 @@ public class GameLoop : MonoBehaviour
 
     private void SettingTime()
     {
+        gameTimeSeconds += gameTime;
+        gameTimeMinutes += gameTime;
+
         if (gameTimeSeconds < 10)
         {
             gameSeconds = Mathf.Floor(gameTimeSeconds);
@@ -62,7 +69,7 @@ public class GameLoop : MonoBehaviour
         else if (gameTimeSeconds >= 10 && gameTimeSeconds < 60)
         {
             gameSeconds = Mathf.Floor(gameTimeSeconds);
-            newSeconds = "" + gameSeconds;
+            newSeconds = gameSeconds.ToString();
         }
         else
         {
@@ -80,8 +87,8 @@ public class GameLoop : MonoBehaviour
 
     private void VerArrows()
     {
-        playerVerVelocity = thePlayer.GetComponent<Rigidbody2D>().velocity.y;
-        writeToHud.SetShipVerSpeedCurrent("" + Mathf.Floor(playerVerVelocity * 100));
+        playerVerVelocity = shipRigidBody.velocity.y;
+        writeToHud.SetShipVerSpeedCurrent(Mathf.Floor(playerVerVelocity * 100).ToString());
 
         if (playerVerVelocity > 0)
         {
@@ -99,8 +106,8 @@ public class GameLoop : MonoBehaviour
 
     private void HorArrows()
     {
-        playerHorVelocity = thePlayer.GetComponent<Rigidbody2D>().velocity.x;
-        writeToHud.SetShipHorSpeedCurrent("" + Mathf.Floor(playerHorVelocity * 100));
+        playerHorVelocity = shipRigidBody.velocity.x;
+        writeToHud.SetShipHorSpeedCurrent(Mathf.Floor(playerHorVelocity * 100).ToString());
 
         if (playerHorVelocity > 0)
         {

@@ -385,7 +385,6 @@ MonoBehaviour:
   bonusText: {fileID: 1998358099}
   maxRandom: 6
   minRandom: 0
-  bonusRandom: 0
 --- !u!1 &58680733
 GameObject:
   m_ObjectHideFlags: 0
@@ -1631,7 +1630,6 @@ MonoBehaviour:
   bonusText: {fileID: 109837516}
   maxRandom: 5
   minRandom: 0
-  bonusRandom: 0
 --- !u!1 &321445431
 GameObject:
   m_ObjectHideFlags: 0
@@ -1793,7 +1791,6 @@ MonoBehaviour:
   bonusText: {fileID: 1539766544}
   maxRandom: 4
   minRandom: 0
-  bonusRandom: 0
 --- !u!1 &409121147
 GameObject:
   m_ObjectHideFlags: 0
@@ -1955,7 +1952,6 @@ MonoBehaviour:
   bonusText: {fileID: 262722464}
   maxRandom: 3
   minRandom: 0
-  bonusRandom: 0
 --- !u!1 &508320832
 GameObject:
   m_ObjectHideFlags: 0
@@ -2385,9 +2381,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0022d61b033ea5545880e5e71b9bb130, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotateLeft: 97
-  rotateRight: 100
-  thrusterOn: 119
 --- !u!4 &748299854
 Transform:
   m_ObjectHideFlags: 0
@@ -2415,10 +2408,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bf365b8c5912d049a10720a16bcfc29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thePlayer: {fileID: 915830172}
-  mainCam: {fileID: 519420031}
+  theShip: {fileID: 915830172}
   theHUD: {fileID: 1509010831}
-  fuelAmount: 0
 --- !u!1 &765446617
 GameObject:
   m_ObjectHideFlags: 0
@@ -2546,7 +2537,6 @@ MonoBehaviour:
   bonusText: {fileID: 161820933}
   maxRandom: 0
   minRandom: 0
-  bonusRandom: 0
 --- !u!1 &783118406
 GameObject:
   m_ObjectHideFlags: 0
@@ -2856,7 +2846,6 @@ MonoBehaviour:
   bonusText: {fileID: 2049920512}
   maxRandom: 7
   minRandom: 0
-  bonusRandom: 0
 --- !u!1 &915830172
 GameObject:
   m_ObjectHideFlags: 0
@@ -2900,10 +2889,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: c7432109a42fe904b82de0404d8766f2, type: 3}
   coreGame: {fileID: 748299852}
   theThruster: {fileID: 1547802939}
-  currentScore: 0
-  altitude: 0
-  locHit: 0
-  altitudeNow: 0
 --- !u!212 &915830174
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3298,7 +3283,6 @@ MonoBehaviour:
   bonusText: {fileID: 2043048186}
   maxRandom: 4
   minRandom: 0
-  bonusRandom: 0
 --- !u!1 &1069159734
 GameObject:
   m_ObjectHideFlags: 0
@@ -4385,13 +4369,13 @@ MonoBehaviour:
   scoreTotal: {fileID: 2132412158}
   timeTotal: {fileID: 275161701}
   fuelTotal: {fileID: 1690470721}
-  altitudeCurrent: {fileID: 1904604785}
-  horSpeedCurrent: {fileID: 1069159736}
-  verSpeedCurrent: {fileID: 1879882693}
+  shipAltitudeCurrent: {fileID: 1904604785}
+  shipHorSpeedCurrent: {fileID: 1069159736}
+  shipVerSpeedCurrent: {fileID: 1879882693}
   horSpeedArrow: {fileID: 992608037}
   verSpeedArrow: {fileID: 740056493}
   insertCoins: {fileID: 1921845125}
-  thePlayer: {fileID: 915830172}
+  thePlayer: {fileID: 915830173}
 --- !u!1 &1512338312
 GameObject:
   m_ObjectHideFlags: 0
@@ -5033,7 +5017,6 @@ MonoBehaviour:
   bonusText: {fileID: 169155000}
   maxRandom: 5
   minRandom: 0
-  bonusRandom: 0
 --- !u!1 &1584045567
 GameObject:
   m_ObjectHideFlags: 0
@@ -6191,7 +6174,6 @@ MonoBehaviour:
   bonusText: {fileID: 290261617}
   maxRandom: 3
   minRandom: 0
-  bonusRandom: 0
 --- !u!1 &1879882691
 GameObject:
   m_ObjectHideFlags: 0
@@ -6499,7 +6481,6 @@ MonoBehaviour:
   bonusText: {fileID: 143339835}
   maxRandom: 4
   minRandom: 0
-  bonusRandom: 0
 --- !u!1 &1904604783
 GameObject:
   m_ObjectHideFlags: 0
@@ -7160,7 +7141,6 @@ MonoBehaviour:
   bonusText: {fileID: 1098266519}
   maxRandom: 3
   minRandom: 0
-  bonusRandom: 0
 --- !u!1 &2033431316
 GameObject:
   m_ObjectHideFlags: 0
@@ -7288,7 +7268,6 @@ MonoBehaviour:
   bonusText: {fileID: 1512338314}
   maxRandom: 4
   minRandom: 0
-  bonusRandom: 0
 --- !u!1 &2043048184
 GameObject:
   m_ObjectHideFlags: 0
@@ -7686,7 +7665,6 @@ MonoBehaviour:
   bonusText: {fileID: 673123980}
   maxRandom: 0
   minRandom: 0
-  bonusRandom: 0
 --- !u!1 &2132412156
 GameObject:
   m_ObjectHideFlags: 0

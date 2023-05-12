@@ -6,15 +6,19 @@ using UnityEngine;
 
 public class RandomBonus : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI bonusText;
+    [SerializeField] private TextMeshProUGUI bonusText;
     [SerializeField] private int maxRandom;
     [SerializeField] private int minRandom;
-    public int bonusRandom;
+
+    private SpriteRenderer bonusSprite;
+    private int bonusRandom;
     private float myTime;
 
-    // Start is called before the first frame update
+    public int GetBonusRandom() => bonusRandom;
+
     void Start()
     {
+        bonusSprite = GetComponent<SpriteRenderer>();
         bonusRandom = Random.Range(minRandom, maxRandom);
         MakeDecision();
     }
@@ -27,11 +31,11 @@ public class RandomBonus : MonoBehaviour
         {
             if (myTime < 0.5f)
             {
-                gameObject.GetComponent<SpriteRenderer>().enabled = true;
+                bonusSprite.enabled = true;
             }
             else if (myTime > 0.5f && myTime < 1)
             {
-                gameObject.GetComponent<SpriteRenderer>().enabled = false;
+                bonusSprite.enabled = false;
             }
             else
             {

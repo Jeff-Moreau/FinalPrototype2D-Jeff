@@ -16,9 +16,10 @@ public class Player : MonoBehaviour
     private DebugLogger debugLogger;
     private Rigidbody2D shipRigidBody;
     private Camera gameCamera;
-    
+    private Transform shipRotation;
+
     private int currentScore;
-    private int multiplyScore;
+    private int scoreMultiplier;
     private int baseScore;
     private float shipCurrentAltitude;
     private float shipAltitude;
@@ -27,23 +28,17 @@ public class Player : MonoBehaviour
     private Vector3 initialCameraPosition;
     private bool goodToLand = false;
 
-    public int GetCurrentScore()
-    {
-        return currentScore;
-    }
-
-    public float GetShipAltitude()
-    {
-        return shipAltitude;
-    }
+    public int GetCurrentScore() => currentScore;
+    public float GetShipAltitude() => shipAltitude;
 
     void Start()
     {
         shipFuelTank = coreGame.GetComponent<GameLoop>();
         debugLogger = GetComponent<DebugLogger>();
         shipRigidBody = GetComponent<Rigidbody2D>();
+        shipRotation = GetComponent<Transform>();
         gameCamera = Camera.main;
-
+        
         initialCameraPosition = gameCamera.transform.position;
         initialShipPosition = transform.position;
 
@@ -55,7 +50,7 @@ public class Player : MonoBehaviour
     {
         shipVerVelocity = shipRigidBody.velocity.y;
 
-        if (shipFuelTank.fuelAmount >0 && shipFuelTank.fuelAmount <= 100)
+        if (shipFuelTank.GetFuelAmount() > 0 && shipFuelTank.GetFuelAmount() <= 100)
         {
             if (!shipWarningSoundFXSource.isPlaying)
             {
@@ -63,7 +58,7 @@ public class Player : MonoBehaviour
                 DebugToCon("Warning Beep");
             }
         }
-        else if (shipFuelTank.fuelAmount <= 0)
+        else if (shipFuelTank.GetFuelAmount() <= 0)
         {
             DebugToCon("The Ship Has Crashed");
             playerSoundFXSource.PlayOneShot(soundFX[1]);
@@ -86,12 +81,12 @@ public class Player : MonoBehaviour
         if (shipCurrentAltitude < 400)
         {
             gameCamera.transform.position = new Vector3(transform.position.x, transform.position.y, -10);
-            gameCamera.GetComponent<Camera>().orthographicSize = 1.5f;
+            gameCamera.orthographicSize = 1.5f;
         }
         else
         {
             gameCamera.transform.position = initialCameraPosition;
-            gameCamera.GetComponent<Camera>().orthographicSize = 5;
+            gameCamera.orthographicSize = 5;
         }
     }
 
@@ -113,7 +108,7 @@ public class Player : MonoBehaviour
                 }
                 else
                 {
-                    currentScore += (baseScore * multiplyScore);
+                    currentScore += (baseScore * scoreMultiplier);
 
                     ShipLanded();
                 }
@@ -125,17 +120,17 @@ public class Player : MonoBehaviour
     {
         DebugToCon("Ship Has Successfuly Landed");
         transform.position = initialShipPosition;
-        GetComponent<Rigidbody2D>().freezeRotation = true;
-        GetComponent<Transform>().eulerAngles = new Vector3(0, 0, 0);
+        shipRigidBody.freezeRotation = true;
+        shipRotation.eulerAngles = new Vector3(0, 0, 0);
      }
 
     private void ShipExplode()
     {
         DebugToCon("The Ship Has Crashed");
         transform.position = initialShipPosition;
-        GetComponent<Rigidbody2D>().freezeRotation = true;
-        GetComponent<Transform>().eulerAngles = new Vector3(0, 0, 0);
-        coreGame.GetComponent<GameLoop>().fuelAmount -= 100;
+        shipRigidBody.freezeRotation = true;
+        shipRotation.eulerAngles = new Vector3(0, 0, 0);
+        shipFuelTank.SetFuelAmount( shipFuelTank.GetFuelAmount() - 100);
         playerSoundFXSource.PlayOneShot(soundFX[1]);
     }
 
@@ -144,7 +139,7 @@ public class Player : MonoBehaviour
         if (collision.tag == "Bonus")
         {
             DebugToCon("You are touching a Bonus");
-            multiplyScore = collision.gameObject.GetComponent<RandomBonus>().bonusRandom;
+            scoreMultiplier = collision.GetComponent<RandomBonus>().GetBonusRandom();
             goodToLand = true;
         }
     }
