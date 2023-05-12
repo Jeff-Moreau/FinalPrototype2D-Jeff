@@ -382,9 +382,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 131cc8e5256b9ff4b919bfa84212864e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bonusText: {fileID: 1998358099}
-  maxRandom: 6
-  minRandom: 0
+  _bonusText: {fileID: 1998358099}
+  _maxRandom: 0
+  _minRandom: 0
 --- !u!1 &58680733
 GameObject:
   m_ObjectHideFlags: 0
@@ -1582,9 +1582,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 131cc8e5256b9ff4b919bfa84212864e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bonusText: {fileID: 109837516}
-  maxRandom: 5
-  minRandom: 0
+  _bonusText: {fileID: 109837516}
+  _maxRandom: 0
+  _minRandom: 0
 --- !u!1 &350554120
 GameObject:
   m_ObjectHideFlags: 0
@@ -1709,9 +1709,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 131cc8e5256b9ff4b919bfa84212864e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bonusText: {fileID: 1539766544}
-  maxRandom: 4
-  minRandom: 0
+  _bonusText: {fileID: 1539766544}
+  _maxRandom: 0
+  _minRandom: 0
 --- !u!1 &409121147
 GameObject:
   m_ObjectHideFlags: 0
@@ -1870,9 +1870,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 131cc8e5256b9ff4b919bfa84212864e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bonusText: {fileID: 262722464}
-  maxRandom: 3
-  minRandom: 0
+  _bonusText: {fileID: 262722464}
+  _maxRandom: 0
+  _minRandom: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -2410,9 +2410,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 131cc8e5256b9ff4b919bfa84212864e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bonusText: {fileID: 161820933}
-  maxRandom: 0
-  minRandom: 0
+  _bonusText: {fileID: 161820933}
+  _maxRandom: 0
+  _minRandom: 0
 --- !u!1 &783118406
 GameObject:
   m_ObjectHideFlags: 0
@@ -2719,9 +2719,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 131cc8e5256b9ff4b919bfa84212864e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bonusText: {fileID: 2049920512}
-  maxRandom: 7
-  minRandom: 0
+  _bonusText: {fileID: 2049920512}
+  _maxRandom: 0
+  _minRandom: 0
 --- !u!1 &915830172
 GameObject:
   m_ObjectHideFlags: 0
@@ -2894,7 +2894,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fafb308ff47a6d49830ca8cfdd118ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugOn: 0
+  _debugOn: 0
 --- !u!114 &915830182
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3166,9 +3166,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 131cc8e5256b9ff4b919bfa84212864e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bonusText: {fileID: 2043048186}
-  maxRandom: 4
-  minRandom: 0
+  _bonusText: {fileID: 2043048186}
+  _maxRandom: 0
+  _minRandom: 0
 --- !u!1 &1069159734
 GameObject:
   m_ObjectHideFlags: 0
@@ -4252,16 +4252,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8bf84dba3c56844aaa4ed157d8944f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreTotal: {fileID: 2132412158}
-  timeTotal: {fileID: 275161701}
-  fuelTotal: {fileID: 1690470721}
-  shipAltitudeCurrent: {fileID: 1904604785}
-  shipHorSpeedCurrent: {fileID: 1069159736}
-  shipVerSpeedCurrent: {fileID: 1879882693}
-  horSpeedArrow: {fileID: 992608037}
-  verSpeedArrow: {fileID: 740056493}
-  insertCoins: {fileID: 1921845125}
-  thePlayer: {fileID: 915830173}
+  _scoreTotal: {fileID: 2132412158}
+  _timeTotal: {fileID: 275161701}
+  _fuelTotal: {fileID: 1690470721}
+  _shipAltitudeCurrent: {fileID: 1904604785}
+  _shipHorSpeedCurrent: {fileID: 1069159736}
+  _shipVerSpeedCurrent: {fileID: 1879882693}
+  _horSpeedArrow: {fileID: 992608037}
+  _verSpeedArrow: {fileID: 740056493}
+  _insertCoins: {fileID: 1921845125}
+  _theShip: {fileID: 915830173}
 --- !u!1 &1512338312
 GameObject:
   m_ObjectHideFlags: 0
@@ -4679,7 +4679,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fafb308ff47a6d49830ca8cfdd118ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugOn: 0
+  _debugOn: 0
 --- !u!82 &1547802947
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4900,9 +4900,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 131cc8e5256b9ff4b919bfa84212864e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bonusText: {fileID: 169155000}
-  maxRandom: 5
-  minRandom: 0
+  _bonusText: {fileID: 169155000}
+  _maxRandom: 0
+  _minRandom: 0
 --- !u!1 &1584045567
 GameObject:
   m_ObjectHideFlags: 0
@@ -6057,9 +6057,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 131cc8e5256b9ff4b919bfa84212864e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bonusText: {fileID: 290261617}
-  maxRandom: 3
-  minRandom: 0
+  _bonusText: {fileID: 290261617}
+  _maxRandom: 0
+  _minRandom: 0
 --- !u!1 &1879882691
 GameObject:
   m_ObjectHideFlags: 0
@@ -6319,9 +6319,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 131cc8e5256b9ff4b919bfa84212864e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bonusText: {fileID: 143339835}
-  maxRandom: 4
-  minRandom: 0
+  _bonusText: {fileID: 143339835}
+  _maxRandom: 0
+  _minRandom: 0
 --- !u!1 &1904604783
 GameObject:
   m_ObjectHideFlags: 0
@@ -6979,9 +6979,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 131cc8e5256b9ff4b919bfa84212864e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bonusText: {fileID: 1098266519}
-  maxRandom: 3
-  minRandom: 0
+  _bonusText: {fileID: 1098266519}
+  _maxRandom: 0
+  _minRandom: 0
 --- !u!1 &2033431316
 GameObject:
   m_ObjectHideFlags: 0
@@ -7106,9 +7106,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 131cc8e5256b9ff4b919bfa84212864e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bonusText: {fileID: 1512338314}
-  maxRandom: 4
-  minRandom: 0
+  _bonusText: {fileID: 1512338314}
+  _maxRandom: 0
+  _minRandom: 0
 --- !u!1 &2043048184
 GameObject:
   m_ObjectHideFlags: 0
@@ -7503,9 +7503,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 131cc8e5256b9ff4b919bfa84212864e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bonusText: {fileID: 673123980}
-  maxRandom: 0
-  minRandom: 0
+  _bonusText: {fileID: 673123980}
+  _maxRandom: 0
+  _minRandom: 0
 --- !u!1 &2132412156
 GameObject:
   m_ObjectHideFlags: 0

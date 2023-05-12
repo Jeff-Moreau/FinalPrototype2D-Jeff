@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class DebugLogger : MonoBehaviour
 {
-    [SerializeField] bool debugOn;
+    [SerializeField] bool _debugOn;
     public void DebugCon(object message, Object sender)
     {
-        if (debugOn)
+        if (_debugOn)
         {
             Debug.Log(message, sender);
         }

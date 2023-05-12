@@ -5,32 +5,32 @@ using UnityEngine;
 
 public class Hud : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI scoreTotal;
-    [SerializeField] private TextMeshProUGUI timeTotal;
-    [SerializeField] private TextMeshProUGUI fuelTotal;
-    [SerializeField] private TextMeshProUGUI shipAltitudeCurrent;
-    [SerializeField] private TextMeshProUGUI shipHorSpeedCurrent;
-    [SerializeField] private TextMeshProUGUI shipVerSpeedCurrent;
-    [SerializeField] private TextMeshProUGUI horSpeedArrow;
-    [SerializeField] private TextMeshProUGUI verSpeedArrow;
-    [SerializeField] private TextMeshProUGUI insertCoins;
-    [SerializeField] private Ship thePlayer;
+    [SerializeField] private TextMeshProUGUI _scoreTotal;
+    [SerializeField] private TextMeshProUGUI _timeTotal;
+    [SerializeField] private TextMeshProUGUI _fuelTotal;
+    [SerializeField] private TextMeshProUGUI _shipAltitudeCurrent;
+    [SerializeField] private TextMeshProUGUI _shipHorSpeedCurrent;
+    [SerializeField] private TextMeshProUGUI _shipVerSpeedCurrent;
+    [SerializeField] private TextMeshProUGUI _horSpeedArrow;
+    [SerializeField] private TextMeshProUGUI _verSpeedArrow;
+    [SerializeField] private TextMeshProUGUI _insertCoins;
+    [SerializeField] private Ship _theShip;
 
-    private float timerBlink;
-    private float scoreNow;
+    private float _timerBlink;
+    private float _scoreNow;
 
-    public void SetTimeTotal(string time) => timeTotal.text = time;
-    public void SetFuelTotal(string fuel) => fuelTotal.text = fuel;
-    public void SetAltitudeCurrent(string altitude) => shipAltitudeCurrent.text = altitude;
-    public void SetShipHorSpeedCurrent(string horSpeed) => shipHorSpeedCurrent.text = horSpeed;
-    public void SetShipVerSpeedCurrent(string verSpeed) => shipVerSpeedCurrent.text = verSpeed;
-    public void SetHorSpeedArrow(string horArrow) => horSpeedArrow.text = horArrow;
-    public void SetVerSpeedArrow(string verArrow) => verSpeedArrow.text = verArrow;
+    public void SetTimeTotal(string time) => _timeTotal.text = time;
+    public void SetFuelTotal(string fuel) => _fuelTotal.text = fuel;
+    public void SetAltitudeCurrent(string altitude) => _shipAltitudeCurrent.text = altitude;
+    public void SetShipHorSpeedCurrent(string horSpeed) => _shipHorSpeedCurrent.text = horSpeed;
+    public void SetShipVerSpeedCurrent(string verSpeed) => _shipVerSpeedCurrent.text = verSpeed;
+    public void SetHorSpeedArrow(string horArrow) => _horSpeedArrow.text = horArrow;
+    public void SetVerSpeedArrow(string verArrow) => _verSpeedArrow.text = verArrow;
 
     private void Start()
     {
-        fuelTotal.text = "0000";
-        timerBlink = 0;
+        _fuelTotal.text = "0000";
+        _timerBlink = 0;
     }
 
     private void Update()
@@ -41,37 +41,37 @@ public class Hud : MonoBehaviour
 
     private void CoinBlink()
     {
-        timerBlink += Time.deltaTime;
+        _timerBlink += Time.deltaTime;
 
-        if (timerBlink < 1.5f)
+        if (_timerBlink < 1.5f)
         {
-            insertCoins.enabled = true;
+            _insertCoins.enabled = true;
         }
-        else if (timerBlink > 1.5f && timerBlink < 2f)
+        else if (_timerBlink > 1.5f && _timerBlink < 2f)
         {
-            insertCoins.enabled = false;
+            _insertCoins.enabled = false;
         }
         else
         {
-            timerBlink = 0;
+            _timerBlink = 0;
         }
     }
 
     private void CurrentScore()
     {
-        scoreNow = thePlayer.GetCurrentScore;
+        _scoreNow = _theShip.GetCurrentScore;
 
-        if (scoreNow == 0)
+        if (_scoreNow == 0)
         {
-            scoreTotal.text = "0000";
+            _scoreTotal.text = "0000";
         }
-        else if (scoreNow > 0 && scoreNow < 100)
+        else if (_scoreNow > 0 && _scoreNow < 100)
         {
-            scoreTotal.text = "00" + scoreNow;
+            _scoreTotal.text = "00" + _scoreNow;
         }
-        else if (scoreNow > 100 && scoreNow < 1000)
+        else if (_scoreNow > 100 && _scoreNow < 1000)
         {
-            scoreTotal.text = "0" + scoreNow;
+            _scoreTotal.text = "0" + _scoreNow;
         }
     }
 }

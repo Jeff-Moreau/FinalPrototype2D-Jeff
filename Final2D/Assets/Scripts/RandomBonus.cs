@@ -6,72 +6,76 @@ using UnityEngine;
 
 public class RandomBonus : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI bonusText;
-    [SerializeField] private int maxRandom;
-    [SerializeField] private int minRandom;
+    [SerializeField] private TextMeshProUGUI _bonusText;
+    [SerializeField] private int _maxRandom;
+    [SerializeField] private int _minRandom;
 
-    private SpriteRenderer bonusSprite;
-    private int bonusRandom;
-    private float myTime;
+    private SpriteRenderer _bonusSprite;
+    private int _bonusRandom;
+    private float _myTime;
 
-    public int GetBonusRandom => bonusRandom;
+    public int GetBonusRandom => _bonusRandom;
 
     void Start()
     {
-        bonusSprite = GetComponent<SpriteRenderer>();
-        bonusRandom = Random.Range(minRandom, maxRandom);
-        MakeDecision();
+        _bonusSprite = GetComponent<SpriteRenderer>();
+        _bonusRandom = Random.Range(_minRandom, _maxRandom);
+        CurrentBonus();
     }
 
     private void Update()
     {
-        myTime += Time.deltaTime;
+        BlinkLandingLocation();
 
-        if (bonusRandom > 1)
-        {
-            if (myTime < 0.5f)
-            {
-                bonusSprite.enabled = true;
-            }
-            else if (myTime > 0.5f && myTime < 1)
-            {
-                bonusSprite.enabled = false;
-            }
-            else
-            {
-                myTime = 0;
-            }
-        }
-
-        if (bonusRandom <= 1)
+        if (_bonusRandom <= 1)
         {
             gameObject.SetActive(false);
         }
-
     }
 
-    private void MakeDecision()
+    private void BlinkLandingLocation()
+    {
+        _myTime += Time.deltaTime;
+
+        if (_bonusRandom > 1)
+        {
+            if (_myTime < 0.5f)
+            {
+                _bonusSprite.enabled = true;
+            }
+            else if (_myTime > 0.5f && _myTime < 1)
+            {
+                _bonusSprite.enabled = false;
+            }
+            else
+            {
+                _myTime = 0;
+            }
+        }
+    }
+
+    private void CurrentBonus()
     {
 
-        if (bonusRandom <= 1) 
+        if (_bonusRandom <= 1) 
         {
-            bonusText.text = "";
+            _bonusText.text = "";
         }
-        else if (bonusRandom == 2)
+        else if (_bonusRandom == 2)
         {
-            bonusText.text = "2X";
+            _bonusText.text = "2X";
         }
-        else if (bonusRandom == 3)
+        else if (_bonusRandom == 3)
         {
-            bonusText.text = "3X";
+            _bonusText.text = "3X";
         }
-        else if (bonusRandom == 4)
+        else if (_bonusRandom == 4)
         {
-            bonusText.text = "4X";
+            _bonusText.text = "4X";
         }
-        else if (bonusRandom >= 5)
+        else if (_bonusRandom >= 5)
         {
-            bonusText.text = "<color=red>5X</color>";
+            _bonusText.text = "<color=red>5X</color>";
         }
     }
 }

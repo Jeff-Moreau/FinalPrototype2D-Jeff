@@ -49,7 +49,7 @@ public class CoreGame : MonoBehaviour
         VerArrows();
         SettingTime();
 
-        if (_userInput.GetInsertCoin && _fuelAmount < 6000)
+        if (_userInput.GetInsertCoin && _fuelAmount < 5250)
         {
             _fuelAmount += 750;
         }
