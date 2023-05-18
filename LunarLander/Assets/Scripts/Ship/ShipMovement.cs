@@ -5,29 +5,19 @@ using UnityEngine;
 public class ShipMovement : MonoBehaviour
 {
 
-    [SerializeField] private GameObject _coreGame;
-    [SerializeField] private GameObject _theThruster;
-
-    private Ship _ship;
-    private DebugLogger _debugLogger;
-    private UserInput _userInput;
-    private Transform _shipRotation;
-    private Rigidbody2D _shipRigidBody;
-    private SpriteRenderer _thrusterToggle;
-
+    [SerializeField] private DebugLogger _debugLogger;
+    [SerializeField] private UserInput _userInput;
+    [SerializeField] private Transform _shipRotation;
+    [SerializeField] private Rigidbody2D _shipRigidBody;
+    [SerializeField] private SpriteRenderer _thrusterToggle;
+    [SerializeField] private Ship _ship;
+    
     private int _fuelUsage;
     private float _shipRotationSpeed;
     private float _thrusterForce;
 
     private void Start()
     {
-        _ship = Ship.instance;
-        _debugLogger = GetComponent<DebugLogger>();
-        _userInput = _coreGame.GetComponent<UserInput>();
-        _shipRotation = GetComponent<Transform>();
-        _shipRigidBody = GetComponent<Rigidbody2D>();
-        _thrusterToggle = _theThruster.GetComponent<SpriteRenderer>();
-
         _fuelUsage = 1;
         _shipRotationSpeed = 15;
         _thrusterForce = 250;

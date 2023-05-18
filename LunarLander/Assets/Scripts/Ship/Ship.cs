@@ -4,17 +4,15 @@ using UnityEngine;
 
 public class Ship : MonoBehaviour
 {
-    public static Ship instance;
 
     [SerializeField] private AudioSource _playerSoundFXSource;
     [SerializeField] private AudioSource _shipWarningSoundFXSource;
     [SerializeField] private AudioSource _gameBackgroundSound;
     [SerializeField] private AudioClip[] _soundFX;
-
-    private DebugLogger _debugLogger;
-    private Rigidbody2D _shipRigidBody;
-    private Camera _gameCamera;
-    private Transform _shipRotation;
+    [SerializeField] private DebugLogger _debugLogger;
+    [SerializeField] private Rigidbody2D _shipRigidBody;
+    [SerializeField] private Transform _shipRotation;
+    [SerializeField] private Camera _gameCamera;
 
     private int _currentScore;
     private int _scoreMultiplier;
@@ -31,6 +29,7 @@ public class Ship : MonoBehaviour
 
     private Vector3 _initialShipPosition;
     private Vector3 _initialCameraPosition;
+
     private bool _goodToLand = false;
 
     public int GetCurrentScore => _currentScore;
@@ -39,13 +38,9 @@ public class Ship : MonoBehaviour
     public int GetShipFuelCapacity => _shipFuelTankCapacity;
     public int GetShipCurrentFuelInTank => _shipCurrentFuelInTank;
     public void SetShipCurrentFuelInTank(int fuel) => _shipCurrentFuelInTank = fuel;
+
     void Start()
     {
-        instance = this;
-        _debugLogger = GetComponent<DebugLogger>();
-        _shipRigidBody = GetComponent<Rigidbody2D>();
-        _shipRotation = GetComponent<Transform>();
-        _gameCamera = Camera.main;
         _initialCameraPosition = _gameCamera.transform.position;
         _initialShipPosition = transform.position;
         _shipRigidBody.freezeRotation = false;
@@ -118,19 +113,15 @@ public class Ship : MonoBehaviour
                 _currentScore += (_baseScore - 30);
                 ShipExplode();
             }
+
+            if (_goodToLand && (Mathf.Floor(_shipVerVelocity * 100) > -10))
+            {
+                _currentScore += (_baseScore * _scoreMultiplier);
+                ShipLanded();
+            }
             else
             {
-                if (Mathf.Floor(_shipVerVelocity * 100) < -10)
-                {
-                    _currentScore += (_baseScore / 2);
-                    ShipExplode();
-                }
-                else
-                {
-                    _currentScore += (_baseScore * _scoreMultiplier);
-
-                    ShipLanded();
-                }
+                ShipExplode();
             }
         }
     }
@@ -138,6 +129,7 @@ public class Ship : MonoBehaviour
     private void ShipLanded()
     {
         DebugToCon("Ship Has Successfuly Landed");
+        _currentScore += (_baseScore / 2);
         transform.position = _initialShipPosition;
         _shipRigidBody.freezeRotation = true;
         _shipRotation.eulerAngles = new Vector3(0, 0, 0);
@@ -167,6 +159,8 @@ public class Ship : MonoBehaviour
     {
         if (collision.CompareTag("Bonus"))
         {
+            DebugToCon("Bouns Removed!");
+            _scoreMultiplier = 0;
             _goodToLand = false;
         }
     }

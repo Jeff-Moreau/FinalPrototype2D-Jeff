@@ -2764,6 +2764,10 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 64e5fcda0078a6047974d44d7add69c6, type: 3}
   - {fileID: 8300000, guid: 15bbe9d2c2eb358488f269af97f8eb6a, type: 3}
   - {fileID: 8300000, guid: c7432109a42fe904b82de0404d8766f2, type: 3}
+  _debugLogger: {fileID: 915830181}
+  _shipRigidBody: {fileID: 915830177}
+  _shipRotation: {fileID: 915830175}
+  _gameCamera: {fileID: 519420031}
 --- !u!212 &915830174
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2881,8 +2885,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1af0c8c78b330646b320c2dce5bc942, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _coreGame: {fileID: 748299852}
-  _theThruster: {fileID: 1547802939}
+  _debugLogger: {fileID: 915830181}
+  _userInput: {fileID: 748299853}
+  _shipRotation: {fileID: 915830175}
+  _shipRigidBody: {fileID: 915830177}
+  _thrusterToggle: {fileID: 1547802941}
+  _ship: {fileID: 915830173}
 --- !u!114 &915830181
 MonoBehaviour:
   m_ObjectHideFlags: 0

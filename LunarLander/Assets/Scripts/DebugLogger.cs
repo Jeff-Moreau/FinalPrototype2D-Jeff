@@ -11,6 +11,5 @@ public class DebugLogger : MonoBehaviour
         {
             Debug.Log(message, sender);
         }
-
     }
 }
